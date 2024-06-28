@@ -1,107 +1,57 @@
-const Q = {};
-const Q1 = JSON.parse(typeof $response != "undefined" && $response.body || null);
-if (typeof $response == "undefined") {
-  delete $request.headers["x-revenuecat-etag"];
-  delete $request.headers["X-RevenueCat-ETag"];
-  Q.headers = $request.headers;
-} else if (Q1 && Q1.subscriber) {
-  Q1.subscriber.subscriptions = Q1.subscriber.subscriptions || {};
-  Q1.subscriber.entitlements = Q1.subscriber.entitlements || {};
-  var headers = {};
-  for (var key in $request.headers) {
-  const reg = /^[a-z]+$/;
-  if (key === "User-Agent" && !reg.test(key)) {
-    var lowerkey = key.toLowerCase();
-    $request.headers[lowerkey] = $request.headers[key];
-    delete $request.headers[key];
-    }
-  }
-  var UA = $request.headers['user-agent'];
-  const app = '1';
-  const UAMappings = {
-    'Super%20AI%20Chat':{ name: 'premium', id: 'chatbot_v4_1999_1y'},
-    'MusicPutty':{ name: 'pro_version', id: 'mp_3599_1y'},//6.24
-    'Linearity':{ name: 'pro', id: 'linearity_curve_pro_yearly_launch_offer'},
-    'iplayTV':{ name: 'com.ll.btplayer.12', id: 'com.ll.btplayer.12'},//6.21
-    '%E8%B5%84%E6%BA%90%E6%90%AC%E8%BF%90%E5%A4%A7%E5%B8%88':{ name: 'SaveTikYoutu_common', id: 'LifetimeSubscription'},
-    'DHWaterMarkManager':{ name: 'Vip', id: 'lifetimeVIP_001'},//6.20
-    
-    'XBListeningEnglish':{ name: 'enPro', id: 'com.shenming.newconceptvip.year'},
-    'FretTrainer':{ name: 'pro', id: 'frettrainer.sub.yearly.pro'},//5.7
-    '%E9%B2%B8%E8%90%BD%E6%96%87%E6%A1%88':{ name: 'vip', id: 'jl_year'},//2024.5.6
-    'PeachTree':{ name: 'GoldMember', id: 'LifetimeGoldMembership'},//2024.5.5
-    'No%20Fusion':{ name: 'LivePhoto', id: 'com.grey.livephoto.reference.price'},//2024.5.5
-    'mark_cup':{ name: 'premiun', id: '202403180021'},//20.24.5.4
-    'VOX':{ name: 'VOX Premium', id: 'com.coppertino.VoxMobile.AU.Loop1_v8'},//20.24.4.22
-    'PDF%20Viewer':{ name: 'sub.pro', id: 'com.pspdfkit.viewer.sub.pro.yearly'},//2024.3.21
-    'Text%20Workflow':{ name: 'pro', id: 'tw_99_1m'},//2024.3.2
-    'FaceMa':{ name: 'Pro access', id: 'Pro_Lifetime'},//Facemo
-    'MadeYu':{ name: 'pro_plus', id: 'my_549_1m_400'},//
-    'clica':{ name: 'pro', id: 'clica.vip.year'},//
-    'FoJiCam':{ name: 'Pro', id: 'com.uzero.cn.fojicam.life2'},//2024.4.9
-    'ShellBoxKit':{ name: 'pro', id: 'ShellBoxKit.Lifetime'},//2024.4.9
+var chxm1023 = JSON.parse($response.body);
+const headers = $request.headers;
+const ua = headers['User-Agent'] || headers['user-agent'];
+const profileid = headers['adapty-sdk-profile-id'] || headers['ADAPTY-SDK-PROFILE-ID'];
 
-    'StarDiary':{ name: 'pro', id: 'com.gsdyx.StarDiary.nonConsumable.forever'},
-    'CountDuck':{ name: 'premium', id: 'Lifetime'},
-    'StarFocus':{ name: 'pro', id: 'com.gsdyx.StarFocus.nonConsumable.forever'},
-    'Context_iOS':{ name: 'pro', id: 'ctx_3y_sspai_preorder_angel'},
-    'Vision':{ name: 'promo_3.0', id: 'vis_lifetime_3.0_promo'},
-    'Structured':{ name: 'pro', id: 'today.structured.pro'},
-    'Cookie':{ name: 'allaccess', id: 'app.ft.Bookkeeping.lifetime'},
-    'CountDuck':{ name: 'premium', id: 'Lifetime'},
-    'HTTPBot':{ name: 'Pro', id: 'httpbot_1499_1y_1w0'},
-    'MyPianist':{ name: 'pro', id: 'com.collaparte.mypianist.pro.gift.twelve'},
-    'TouchRetouchBasic':{ name: 'premium', id: 'tr5_yearlysubsc_30_and_20_dlrs'},//年底订阅
-    'Free':{ name: 'pro', id: 'appspree_pro_lifetime'},
-    'Version':{ name: 'pro', id: 'httpbot_1499_1y_1w0'},
-    'wordswag':{ name: 'pro', id: 'Pro_Launch_Monthly'},
-    'BlackBox':{ name: 'plus', id: 'app.filmnoir.appstore.purchases.lifetime'},
-    'LongmaoApp':{ name: 'pro', id: 'douyina_forever_01'},
-    'AnkiPro':{ name: 'Premium', id: 'com.ankipro.app.lifetime'},
-    'AIChat':{ name: 'AI Plus', id: 'aiplus_yearly'},
-    'SmartAIChat':{ name: 'Premium', id: 'sc_3999_1y'},
-    'AIKeyboard':{ name: 'plus_keyboard', id: 'aiplus_keyboard_yearly'},
-    'TextMask':{ name: 'pro', id: 'tm_lifetime'},
-    'MusicMate':{ name: 'premium', id: 'mm_lifetime_68_premium'},
-    'ImagineAI':{ name: 'pro', id: 'artistai.yearly.1'},
-    'VoiceAI':{ name: 'Special Offer', id: 'voiceannualspecial'},
-    'Langster':{ name: 'Premium', id: 'com.langster.universal.lifetime'},
-    'Chat%E7%BB%83%E5%8F%A3%E8%AF%AD':{ name: 'Premium', id: 'com.tech.AiSpeak.All'},
-    'Readle':{ name: 'Premium', id: 'com.hello.german.yearly'},
-    'image_upscaler':{ name: 'pro', id: 'yearly_sub_pro'},
-    'Muse':{ name: 'pro', id: 'monthly_pro_muse'},
-    'Funexpected%20Math':{ name: 'plus', id: 'Plus6Months14DaysTrial'},
-    'cdiary':{ name: 'Premium', id: 'pub.kiya.daymoment.lifetime'},
-    'Sex%20Actions':{ name: 'Premium Plus', id: 'ru.sexactions.subscriptionPlusWeek1'},
-    'Law':{ name: 'vip', id: 'LawVIPOneYear'},
-    'Emoji+%20%F0%9F%98%9':{ name: 'premium', id: 'com.emoji.freemium.subscription.premium'},
-    'universal':{ name: 'Premium', id: 'remotetv.yearly.01'},
-    'HabitKit':{ name: 'Pro', id: 'habitkit_1799_lt'},
-    'windiary':{ name: 'Pro', id: 'windiary_1799_lt'},
-    'Liftbear':{ name: 'Pro', id: 'liftbear_2399_1y'},
-    'Currency':{ name: 'plus', id: 'com.jeffreygrossman.currencyapp.iap.pro.crossgrade'},
-    
-    
-    
+const list = {
+  'ChatAI': { id: "chatai_yearly_ios", bundle_id: "com.scaleup.chatai", latest: "chxm1023" },  //Nova-chat机器人
+  'FacePlus': { id: "faceplus_yearly_subs_3dft_ios", bundle_id: "com.scaleup.faceplus", latest: "chxm1023" },  //Retouch: Al FaceEditor
+  'Batched': { id: "com.advasoft.batched.premium_year", bundle_id: "com.advasoft.batched", latest: "chxm1023" }  //Batched-多量图片编辑器
+};
+
+const premiumTemplate = {"id":"premium","is_lifetime":false,"store":"app_store","starts_at":null,"billing_issue_detected_at":null,"unsubscribed_at":null,"expires_at":"2099-09-09T09:09:09.000000+0000","will_renew":true,"is_active":true,"offer_id":null,"is_in_grace_period":false,"activated_at":"2024-01-23T09:09:09.000000+0000","active_promotional_offer_id":null,"renewed_at":"2024-01-23T09:09:09.000000+0000","is_refund":false,"active_introductory_offer_type":"free_trial","cancellation_reason":null,"active_promotional_offer_type":null};
+
+const receiptTemplate = {"quantity":"1","purchase_date_ms":"1706000949000","expires_date":"2099-09-09 09:09:09 Etc/GMT","expires_date_pst":"2099-09-09 06:06:06 America/Los_Angeles","is_in_intro_offer_period":"false","transaction_id":"490001271881589","is_trial_period":"true","original_transaction_id":"490001271881589","purchase_date":"2024-01-23 09:09:09 Etc/GMT","original_purchase_date_pst":"2024-01-23 01:09:09 America/Los_Angeles","in_app_ownership_type":"PURCHASED","original_purchase_date_ms":"1706000949000","web_order_line_item_id":"490000579504987","expires_date_ms":"4092628149000","purchase_date_pst":"2024-01-23 01:09:09 America/Los_Angeles","original_purchase_date":"2024-01-23 09:09:09 Etc/GMT"};
+
+const profilesPattern = /analytics\/profiles\/.+$/;
+const receiptPattern = /(receipt\/validate|purchase-containers\/.+)/;
+
+for (const key in list) {
+  if (new RegExp(`^${key}`, `i`).test(ua)) {
+
+    const premium = {
+      ...premiumTemplate,
+      "vendor_product_id": list[key].id
     };
 
-  const data = {
-    "expires_date": "2099-12-31T12:00:00Z",
-    "original_purchase_date": "2023-09-01T11:00:00Z",
-    "purchase_date": "2023-09-01T11:00:00Z",
-    "ownership_type": "PURCHASED",
-    "store": "app_store"
-  };
-  for (const i in UAMappings) {
-    if (new RegExp(`^${i}`, 'i').test(UA)) {
-      const { name, id } = UAMappings[i];
-      Q1.subscriber.subscriptions = {};
-      Q1.subscriber.subscriptions[id] = data;
-      Q1.subscriber.entitlements[name] = JSON.parse(JSON.stringify(data));
-      Q1.subscriber.entitlements[name].product_identifier = id;
-      break;
+    const receiptdata = {
+      ...receiptTemplate,
+      "product_id": list[key].id
+    };
+
+    if (profilesPattern.test($request.url)) {
+      chxm1023.data.attributes.subscriptions = {
+        [list[key].id]: {
+          ...premium,
+          "vendor_transaction_id": "490001271881589",
+          "vendor_original_transaction_id": "490001271881589",
+          "is_sandbox": false
+        }
+      };
+      chxm1023.data.attributes.paid_access_levels = {
+        premium: {
+          ...premium
+        }
+      };
     }
+
+    if (receiptPattern.test($request.url)) {
+      chxm1023 = {"data":{"type":"adapty_inapps_apple_receipt_validation_result","id":profileid,"attributes":{"app_id":"56eb457c-6ad4-40aa-9b29-ea29e10e3505","profile_id":profileid,"apple_validation_result":{"environment":"Production","receipt":{"receipt_type":"Production","app_item_id":1560806510,"receipt_creation_date":"2024-01-23 09:09:09 Etc/GMT","bundle_id":list[key].bundle_id,"in_app":[{...receiptdata}],"original_purchase_date":"2024-01-23 09:09:09 Etc/GMT","adam_id":1560806510,"receipt_creation_date_pst":"2024-01-23 01:09:09 America/Los_Angeles","request_date":"2024-01-23 09:09:09 Etc/GMT","request_date_pst":"2024-01-23 01:09:09 America/Los_Angeles","version_external_identifier":854389279,"request_date_ms":"1706000949000","original_purchase_date_pst":"2024-01-23 01:09:09 America/Los_Angeles","application_version":"1","original_purchase_date_ms":"1706000949000","receipt_creation_date_ms":"1706000949000","original_application_version":"1","download_id":502124859031306100},"status":0,"pending_renewal_info":[{"expiration_intent":"1","product_id":list[key].id,"is_in_billing_retry_period":"0","auto_renew_product_id":list[key].id,"original_transaction_id":"490001271881589","auto_renew_status":"0"}],"latest_receipt_info":[{...receiptdata}],"latest_receipt":list[key].latest},"segment_hash":"8245f974014fdf4c","promotional_offer_eligibility":false,"non_subscriptions":null,"custom_attributes":{},"customer_user_id":null,"introductory_offer_eligibility":false,"subscriptions":{[list[key].id]:{...premium,"vendor_transaction_id":"490001271881589","vendor_original_transaction_id":"490001271881589","is_sandbox":false}},"total_revenue_usd":0,"paid_access_levels":{"premium":{...premium}}}}};
+    }
+
+    console.log('已操作成功🎉🎉🎉\n叮当猫の分享频道: https://t.me/chxm1023');
+    break;
   }
-  Q.body = JSON.stringify(Q1);
 }
-$done(Q);
+
+$done({ body: JSON.stringify(chxm1023) });
