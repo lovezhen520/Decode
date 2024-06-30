@@ -1,6 +1,6 @@
-//Sun Jun 30 2024 00:01:04 GMT+0000 (Coordinated Universal Time)
+//Sun Jun 30 2024 00:09:51 GMT+0000 (Coordinated Universal Time)
 //Base:https://github.com/echo094/decode-js
-//Modify:https://github.com/smallfawn/decode_action
+//Modify:https://github.com/lck7/Decode
 const $ = new Env("🍕达美乐披萨"),
   ckName = "dlm_data";
 $.host = ($.isNode() ? process.env.dlm_game : $.getdata("dlm_game")) || "";
