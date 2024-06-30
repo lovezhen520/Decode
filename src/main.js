@@ -66,3 +66,4 @@ if (processedCode !== sourceCode) {
 } else {
   console.log(`所有插件处理后的代码与原代码一致，未写入文件。`);
 }
+
