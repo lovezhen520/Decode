@@ -59,7 +59,7 @@ for (let plugin of plugins) {
 let time = new Date().toLocaleString('en-US', {timeZone: 'Asia/Shanghai'});
 if (processedCode !== sourceCode) {
   // 输出代码
-  fs.writeFile(decodeFile, "//" + time + '\n' + "//Modify:https://github.com/lck7/decode" + '\n' + processedCode, (err) => {
+  fs.writeFile(decodeFile, "//" + time + '\n' + "//Author:https://github.com/lck7" + '\n' + processedCode, (err) => {
     if (err) throw err;
     console.log(`使用插件 ${pluginUsed} 成功处理并写入文件 ${decodeFile}`);
   });
