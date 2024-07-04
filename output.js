@@ -1,5 +1,5 @@
-//7/4/2024, 9:27:15 AM
-//Modify:https://github.com/lck7/decode
+//7/4/2024, 9:57:36 AM
+//Author:https://github.com/lck7
 var Url = $request.url;
 function setQueryString(_0x4f5ad9, _0x2f8f4c) {
   var _0x3b0287 = Url.split("?"),
