@@ -1,399 +1,176 @@
-//7/4/2024, 7:13:06 PM
+//7/5/2024, 10:55:27 AM
 //Author:https://github.com/lck7
-const $ = new Env("夸克网盘"),
-  ckName = "quark_data",
-  userCookie = $.toObj($.isNode() ? process.env[ckName] : $.getdata(ckName)) || [];
-$.userIdx = 0;
-$.userList = [];
-$.notifyMsg = [];
+const $ = new Env("🍕达美乐披萨"),
+  ckName = "dlm_data";
+$.host = ($.isNode() ? process.env.dlm_game : $.getdata("dlm_game")) || "";
+$.gameDate = ($.isNode() ? process.env.dlm_date : $.getdata("dlm_date")) || "";
+$.score = $.toObj($.isNode() ? process.env.dlm_score : $.getdata("dlm_score")) || "false";
+$.rewardList = $.toObj($.isNode() ? process.env.dlm_reward : $.getdata("dlm_reward")) || {};
+const Notify = 1;
 const notify = $.isNode() ? require("./sendNotify") : "";
-$.is_debug = ($.isNode() ? process.env.IS_DEDUG : $.getdata("is_debug")) || "false";
-$.quark_user = ($.isNode() ? process.env.quark_user : $.getdata("quark_user")) || "";
+let userCookie = $.toObj($.isNode() ? process.env[ckName] : $.getdata(ckName)) || [];
+$.userList = [];
+$.userIdx = 0;
+$.notifyMsg = [];
 async function main() {
-  for (let _0x3c705e of $.userList) {
-    $.notifyMsg = [];
-    $.title = "";
+  console.log("\n================== 任务 ==================\n");
+  if (!$.host) {
+    return $.msg($.name, "⚠️ Script run error", "未获取活动id，请先完成一次游戏获取token");
+  }
+  $.host = $.host.split(",");
+  $.log("当前拥有的活动id: " + $.host);
+  for (let _0xbbd4b2 of $.userList) {
     try {
-      await _0x3c705e.signin();
-      if (_0x3c705e.ckStatus) {
-        await _0x3c705e.getUserInfo();
-        await _0x3c705e.getSignInfo();
-        if (_0x3c705e.sleepTrigger) {
-          $.log("[" + (_0x3c705e.userName || _0x3c705e.index) + "][INFO] 开始执行睡眠/睡醒打卡任务...\n");
-          if (_0x3c705e.sleepTrigger.sleep) {
-            await _0x3c705e.sleepSign("sleep");
+      if (_0xbbd4b2.ckStatus) {
+        $.log("========================================");
+        let _0x4fee01 = [];
+        for (let _0x1c868f of $.host) {
+          console.log("账号[" + _0xbbd4b2.index + "][" + _0x1c868f + "] 开始执行任务...");
+          _0xbbd4b2.drawStatus = true;
+          let _0x275c1a = await _0xbbd4b2.getGameSatuts(_0x1c868f);
+          if (!_0x275c1a) {
+            continue;
           }
-          if (_0x3c705e.sleepTrigger.wake) {
-            let _0x289d33 = await _0x3c705e.sleepSign("wake");
-            $.notifyMsg.push("睡觉打卡: " + (_0x289d33 || "不在指定时间范围内"));
-          }
-        } else {
-          $.log("[" + (_0x3c705e.userName || _0x3c705e.index) + "][ERROR] 睡眠打卡: 未获取任务数据，跳过任务\n");
-          $.notifyMsg.push("睡眠打卡: 未获取任务数据，跳过任务");
+          await _0xbbd4b2.getGameSatuts(_0x1c868f);
+          await _0xbbd4b2.todoList(_0x1c868f);
+          _0x4fee01.push(_0x1c868f);
+          $.log("========================================");
         }
-        if (_0x3c705e.taskTrigger) {
-          $.log("[" + (_0x3c705e.userName || _0x3c705e.index) + "][INFO] 开始执行福利空间日常任务...\n");
-          for (let _0x2be0fe in _0x3c705e.taskTrigger) {
-            $.log("[" + (_0x3c705e.userName || _0x3c705e.index) + "][INFO] 正在执行" + _0x3c705e.taskTrigger[_0x2be0fe].name + "\n");
-            await _0x3c705e.triggerTask(_0x3c705e.taskTrigger[_0x2be0fe]);
-          }
-          $.notifyMsg.push("日常任务: 完成任务(" + _0x3c705e.taskDone + "/" + Object.keys(_0x3c705e.taskTrigger).length + ")");
-        } else {
-          $.log("[" + (_0x3c705e.userName || _0x3c705e.index) + "][ERROR] 日常任务:未获取任务数据，跳过任务\n");
-          $.notifyMsg.push("日常任务: 未获取任务数据，跳过任务");
-        }
-        if (_0x3c705e.welfare) {
-          let _0x469c9d = await _0x3c705e.welfareSignin(),
-            _0x329ed8 = await _0x3c705e.getCoin();
-          $.notifyMsg.push("福利空间: " + _0x469c9d + "｜" + _0x329ed8 + "金币");
-        } else {
-          $.log("[" + (_0x3c705e.userName || _0x3c705e.index) + "][ERROR] 未获取福利空间签到数据, 跳过任务\n");
-          $.notifyMsg.push("福利空间: 未获取签到数据, 跳过任务");
-        }
-        if (_0x3c705e.carbon) {
-          let _0x3fd02b = await _0x3c705e.carbonSignin(),
-            _0x5b989d = (await _0x3c705e.getReceiveEngeryList()) ?? [];
-          for (let _0x11d41b of _0x5b989d) {
-            await _0x3c705e.receiveEngery(_0x11d41b.recordId);
-          }
-          let _0x52bee1 = await _0x3c705e.carbonCoin();
-          $.notifyMsg.push("低碳空间: " + _0x3fd02b + "｜" + (_0x52bee1 - 0) / 100 + "g");
-          await _0x3c705e.carbonTravelQuery();
-          await _0x3c705e.carbonTravel();
-        } else {
-          $.log("[" + (_0x3c705e.userName || _0x3c705e.index) + "][ERROR] 未获取低碳空间签到数据, 跳过任务\n");
-          $.notifyMsg.push("低碳空间: 未获取签到数据, 跳过任务");
-        }
+        $.log("所有活动处理完毕");
+        $.setdata(_0x4fee01.join(","), "dlm_game");
       } else {
-        DoubleLog("⛔️ 「" + (_0x3c705e.userName ?? "账号" + index) + "」check ck error!");
+        $.notifyMsg.push("❌账号" + _0xbbd4b2.index + " >> Check ck error!");
       }
-      $.name = "夸克网盘任务(" + _0x3c705e.index + "/" + userCookie.length + ")";
-      const _0x40ce70 = {
-        $media: _0x3c705e.avatar
-      };
-      await sendMsg($.notifyMsg.join("\n"), _0x40ce70);
-    } catch (_0x299cbc) {
-      throw _0x299cbc;
+    } catch (_0xc4dfd8) {
+      $.log(_0xc4dfd8);
     }
   }
+  $.setjson($.rewardList, "dlm_reward");
 }
 class UserInfo {
-  constructor(_0x1815b9) {
+  constructor(_0x588007) {
     this.index = ++$.userIdx;
-    this.kps = _0x1815b9.kps;
-    this.welfare = _0x1815b9.welfare;
-    this.carbon = "" || _0x1815b9.carbon;
-    this.taskTrigger = _0x1815b9.taskTrigger;
-    this.sleepTrigger = _0x1815b9.sleepTrigger;
-    this.token = "" || _0x1815b9.token || _0x1815b9;
-    this.userId = "" || _0x1815b9.userId;
-    this.userName = _0x1815b9.userName;
-    this.avatar = _0x1815b9.avatar;
-    this.taskDone = 0;
+    this.openid = "" + _0x588007.userId;
+    this.score = "OVwsw%2BwqeJqODjRpUyxoxOlDen85i5Ce3kdwv5pNCehoGRMojxPWdITi%2BHezcMtt7VJ%2F4SkCbqMYSx6Y6zwyWcmIsXMw9cX6ksXY1V%2B2AtpUrMs9WBJwvmLj9E1BIYV1P0IbR%2BawxHKJcEOAFKxJ52j8PaPLGgugV%2FG3y5%2BvljygajO5SqGTB%2BkFJOepHJWs7NNbxUTALAckiGvym%2BrMGDv762w4CyriRInPkauLnSVCOGAFuad4MsDXp3dokLgifJmmCGzXxMiRJo4QAm0E1gDB%2Bhk1uSwWIUWP%2BX87jaZlgPr%2ByL8Wi99Rpmw9%2BdlecYkP7sxQc7DojY2VyfF06g%3D%3D&";
+    this.body = _0x588007.token;
     this.ckStatus = true;
-    this.baseUrl = "https://drive-m.quark.cn";
-    this.headers = {
-      Cookie: this.token,
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"
+    this.drawStatus = true;
+    this.sharingStatus = true;
+    const _0xe7ca23 = {
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.42(0x18002a2c) NetType/WIFI Language/zh_CN",
+      "Content-Type": "application/x-www-form-urlencoded"
     };
-    this.fetch = async _0x5d6ce4 => {
-      try {
-        if (typeof _0x5d6ce4 === "string") {
-          _0x5d6ce4 = {
-            url: _0x5d6ce4
-          };
-        }
-        if (_0x5d6ce4?.["url"]?.["startsWith"]("/") || _0x5d6ce4?.["url"]?.["startsWith"](":")) {
-          _0x5d6ce4.url = this.baseUrl + _0x5d6ce4.url;
-        }
-        const _0x4a9b1c = {
-          ..._0x5d6ce4,
-          headers: _0x5d6ce4.headers || this.headers,
-          url: _0x5d6ce4.url
+    this.headers = _0xe7ca23;
+  }
+  getRandomTime() {
+    return randomInt(1000, 3000);
+  }
+  async gameDone(_0x4e8c17) {
+    try {
+      let _0x58fd04 = $.score != "false" ? $.queryStr({
+        openid: this.openid,
+        score: this.score,
+        tempId: "null"
+      }) : this.body;
+      const _0xd84b9a = {
+        url: "https://game.dominos.com.cn/" + _0x4e8c17 + "/game/gameDone",
+        headers: this.headers,
+        body: _0x58fd04
+      };
+      let _0x588aac = await httpRequest(_0xd84b9a);
+      if (_0x588aac?.["statusCode"] == 0) {
+        console.log("账号[" + this.index + "][" + _0x4e8c17 + "] 抽奖成功!获得" + _0x588aac?.["content"]?.["name"]);
+        let _0x5bf348 = _0x588aac?.["content"]["name"]["replace"](/(奖\-[1-9]\：|奖\：)/g, "奖 ")["replace"]("一张", "")["replace"]("1份", "")["replace"]("1张", "");
+        $.rewardList[_0x588aac?.["content"]["id"]] = _0x5bf348;
+      } else {
+        console.log("账号[" + this.index + "][" + _0x4e8c17 + "] " + _0x588aac?.["errorMessage"]);
+        this.drawStatus = false;
+      }
+    } catch (_0x35fc9f) {
+      console.log(_0x35fc9f);
+    }
+  }
+  async sharingDone(_0x55de80) {
+    try {
+      const _0x53e637 = {
+        url: "https://game.dominos.com.cn/" + _0x55de80 + "/game/sharingDone",
+        headers: this.headers,
+        body: "openid=" + this.openid + "&from=1&target=0"
+      };
+      let _0x513359 = await httpRequest(_0x53e637);
+      if (_0x513359?.["statusCode"] == 0) {
+        console.log("账号[" + this.index + "][" + _0x55de80 + "] 分享成功,抽奖次数+" + _0x513359?.["content"]?.["gameNum"]);
+      } else {
+        console.log("账号[" + this.index + "][" + _0x55de80 + "] " + _0x513359?.["errorMessage"]);
+        this.sharingStatus = false;
+      }
+    } catch (_0x240928) {
+      console.log(_0x240928);
+    }
+  }
+  async todoList(_0x107013) {
+    let _0x4e09e2 = 1;
+    do {
+      await this.sharingDone(_0x107013);
+    } while (this.sharingStatus && _0x4e09e2++ <= 10);
+    _0x4e09e2 = 0;
+    do {
+      await this.gameDone(_0x107013);
+    } while (this.drawStatus && _0x4e09e2++ <= 12);
+    await this.point(_0x107013);
+  }
+  async getGameSatuts(_0x57a236) {
+    try {
+      const _0x1d4224 = {
+        url: "https://game.dominos.com.cn/" + _0x57a236 + "/getUser?openid=" + this.openid,
+        headers: this.headers
+      };
+      let _0x18edd3 = (await httpRequest(_0x1d4224)) ?? "本期活动已经结束";
+      if (_0x18edd3?.["statusCode"] == 0) {
+        return true;
+      }
+      console.log("账号[" + this.index + "][" + _0x57a236 + "] 本期活动已结束，跳过任务");
+    } catch (_0x1119b0) {
+      console.log(_0x1119b0);
+    }
+  }
+  async point(_0x1cf70b) {
+    try {
+      const _0x10bbc7 = {
+        url: "https://game.dominos.com.cn/" + _0x1cf70b + "/game/myPrize?openid=" + this.openid + "&pageSize=1000&pageNum=1",
+        headers: this.headers
+      };
+      let _0x10809c = await httpRequest(_0x10bbc7);
+      if (_0x10809c?.["statusCode"] == 0) {
+        let _0xd2eba = $.SakuraUtils.getTotal(_0x10809c?.["content"]["filter"](_0x442a9d => parseInt(_0x442a9d.num) >= 1), "id");
+        DoubleLog("账号[" + $.SakuraUtils.phone_num(_0x10809c?.["extra"]) + "][" + _0x1cf70b + "] 奖品:");
+        const _0x6beb90 = {
+          "001": _0x48e30e.ajnXp,
+          "002": _0x48e30e.eMGKB,
+          "003": _0x48e30e.TusiI,
+          "004": _0x48e30e.feqjr,
+          "005": _0x48e30e.QoviK
         };
-        const _0x2bd27a = await Request(_0x4a9b1c);
-        debug(_0x2bd27a, _0x5d6ce4?.["url"]?.["replace"](/\/+$/, "")["substring"](_0x5d6ce4?.["url"]?.["lastIndexOf"]("/") + 1));
-        if (_0x2bd27a?.["code"] == 401) {
-          throw new Error(_0x2bd27a?.["message"] || "用户需要去登录");
+        _0x6beb90["001"] = "一等奖";
+        _0x6beb90["002"] = "二等奖";
+        _0x6beb90["003"] = "三等奖";
+        _0x6beb90["004"] = "四等奖";
+        _0x6beb90["005"] = "五等奖";
+        _0x6beb90["005"] = "五等奖";
+        _0x6beb90["006"] = "五等奖";
+        _0x6beb90["007"] = "五等奖";
+        _0x6beb90["008"] = "五等奖";
+        _0x6beb90["009"] = "五等奖";
+        let _0x3e32b6 = _0x6beb90;
+        _0xd2eba = _0xd2eba.sort((_0x1d4dbe, _0x2da2f6) => parseInt(_0x1d4dbe.name) - parseInt(_0x2da2f6.name));
+        for (let _0x2d70bf of _0xd2eba) {
+          $.rewardList[_0x2d70bf.name] ? DoubleLog($.rewardList[_0x2d70bf.name] + "x" + _0x2d70bf.value) : DoubleLog(_0x3e32b6[_0x2d70bf.name] + " 免费未知奖品券x" + _0x2d70bf.value);
         }
-        return _0x2bd27a;
-      } catch (_0x30bc4a) {
-        this.ckStatus = false;
-        $.log("[" + (this.userName || this.index) + "][ERROR] 请求发起失败!" + _0x30bc4a + "\n");
+      } else {
+        console.log("❌" + _0x10809c?.["errorMessage"]);
       }
-    };
-  }
-  async getUserInfo() {
-    try {
-      let _0x10dbcd = await this.fetch("https://pan.quark.cn/account/info?fr=h5&platform=others");
-      this.userName = _0x10dbcd?.["data"]?.["nickname"];
-      $.notifyMsg.push("当前用户: " + (this.userName ?? "账号" + this.index));
-    } catch (_0x4f19bc) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 查询用户信息失败: " + _0x4f19bc + "\n");
-    }
-  }
-  async getSignInfo() {
-    try {
-      const _0x572f41 = {
-        url: "https://drive-m.quark.cn/1/clouddrive/capacity/growth/info",
-        params: {}
-      };
-      _0x572f41.params.pr = "ucpro";
-      _0x572f41.params.fr = "pc";
-      _0x572f41.params.uc_param_str = "";
-      let _0x15aac1 = await this.fetch(_0x572f41),
-        {
-          sign_daily: _0x1dfddd,
-          sign_daily_reward: _0x5ac1b1
-        } = _0x15aac1?.["data"]?.["cap_sign"] ?? {},
-        _0x48c68d = _0x1dfddd ? "今日获得" + _0x5ac1b1 / 1048576 + "MB" : _0x15aac1?.["message"] || "今日未签到";
-      $.log("[" + (this.userName || this.index) + "][INFO] " + _0x48c68d + "\n");
-      $.notifyMsg.push("签到任务: " + _0x48c68d);
-    } catch (_0x3dab21) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 查询积分余额: " + _0x3dab21 + "\n");
-    }
-  }
-  async signin() {
-    try {
-      const _0x123253 = {
-        sign_cyclic: true
-      };
-      const _0x1ad671 = {
-        url: "https://drive-m.quark.cn/1/clouddrive/capacity/growth/sign",
-        params: {},
-        type: "post",
-        dataType: "json",
-        body: _0x123253
-      };
-      _0x1ad671.params.pr = "ucpro";
-      _0x1ad671.params.fr = "pc";
-      _0x1ad671.params.uc_param_str = "";
-      let _0x25dc4b = await this.fetch(_0x1ad671),
-        _0x4a90f2 = _0x25dc4b?.["data"]?.["sign_daily_reward"] ? "签到成功!" : "" + _0x25dc4b?.["message"];
-      $.log("[" + (this.userName || this.index) + "][INFO] 空间签到: " + _0x4a90f2 + "\n");
-    } catch (_0x3ece3b) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 空间签到: " + _0x3ece3b + "\n");
-    }
-  }
-  async welfareSignin() {
-    try {
-      const _0x584121 = {
-        url: "https://coral2.quark.cn/quark/welfare/v2/signIn?" + this.welfare.params
-      };
-      let _0x20a8e4 = await this.fetch(_0x584121),
-        _0x1b1f17 = _0x20a8e4?.["msg"] || "获得" + _0x20a8e4?.["data"]?.["prizes"]?.[0]?.["rewardItem"]?.["name"];
-      $.log("[" + (this.userName || this.index) + "][INFO] 福利空间: " + _0x1b1f17 + "\n");
-      return _0x1b1f17;
-    } catch (_0x4ac1f9) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 福利空间签到: " + _0x4ac1f9 + "\n");
-    }
-  }
-  async triggerTask(_0x4f5505) {
-    try {
-      const _0x54151a = {
-        url: "https://coral2.quark.cn/task/trigger?" + _0x4f5505.params
-      };
-      let _0x2e4581 = await this.fetch(_0x54151a);
-      if (_0x2e4581?.["msg"]["match"](/重复请求/) || !_0x2e4581?.["msg"]) {
-        this.taskDone++;
-      }
-      if (!_0x2e4581?.["success"]) {
-        throw new Error(_0x2e4581?.["msg"]);
-      }
-      $.log("[" + (this.userName || this.index) + "][INFO] 任务完成,获得" + _0x2e4581?.["data"]?.["prizes"]?.[0]?.["rewardItem"]?.["amount"] + "金币\n");
-    } catch (_0x3ba661) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] " + _0x3ba661 + "\n");
-    }
-  }
-  async sleepSign(_0x16fbb3) {
-    let _0x2f0d77 = _0x16fbb3 == "sleep" ? "睡眠" : "睡醒";
-    try {
-      const _0x131837 = {
-        Accept: "*/*",
-        Origin: "https://b.quark.cn",
-        Connection: "keep-alive",
-        "Content-Type": "application/x-www-form-urlencoded",
-        Referer: "https://b.quark.cn/",
-        Host: "coral2.quark.cn",
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_4_1 like Mac OS X; zh-cn) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/19E258 Quark/6.11.2.2085 Mobile",
-        "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "zh-Hans-CN;q=1, en-CN;q=0.9"
-      };
-      const _0xc0fd60 = {
-        url: "https://coral2.quark.cn/quark/welfare/v2/sleep/trigger?" + this.sleepTrigger[_0x16fbb3].params,
-        type: "post",
-        headers: _0x131837,
-        body: this.sleepTrigger[_0x16fbb3].body
-      };
-      let _0x585fdb = await this.fetch(_0xc0fd60);
-      if (!_0x585fdb?.["success"]) {
-        throw new Error(_0x585fdb?.["msg"]);
-      }
-      $.log("[" + (this.userName || this.index) + "][INFO] " + _0x2f0d77 + "打卡成功！\n");
-      let _0x5ab546 = "升级还需" + _0x585fdb?.["data"]?.["nextConfig"]?.["headCount"] + "次打卡｜" + _0x585fdb?.["data"]?.["headTitle"];
-      $.log("[" + (this.userName || this.index) + "][INFO] " + _0x2f0d77 + "打卡成功！\n");
-      return _0x5ab546;
-    } catch (_0x1ba08d) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] " + _0x2f0d77 + "打卡: " + _0x1ba08d + "\n");
-    }
-  }
-  async getCoin() {
-    try {
-      const _0x55ca99 = {
-        url: "https://coral2.quark.cn/quark/welfare/v2/queryCoinRecordList",
-        params: {}
-      };
-      _0x55ca99.params.pr = "ucpro";
-      _0x55ca99.params.fr = "pc";
-      _0x55ca99.params.uc_param_str = "";
-      _0x55ca99.params.appId = "quark_welfare_center_task";
-      _0x55ca99.params.actId = "quark_welfare_center";
-      _0x55ca99.params.page = 1;
-      _0x55ca99.params.size = 10;
-      _0x55ca99.params.kps = this.kps;
-      let _0x1927de = await this.fetch(_0x55ca99);
-      $.log("[" + (this.userName || this.index) + "][INFO] 福利空间金币信息查询成功！\n");
-      let _0x551c89 = _0x1927de?.["data"]?.["extra"]?.["incomeAmount"] - 0 - _0x1927de?.["data"]?.["extra"]?.["payoutAmount"];
-      $.log("[" + (this.userName || this.index) + "][INFO] 当前余额: " + _0x551c89 + "金币\n");
-      return _0x551c89;
-    } catch (_0x59ea42) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 福利空间查询金币信息: " + _0x59ea42 + "\n");
-    }
-  }
-  async carbonSignin() {
-    try {
-      const _0x37838b = {
-        url: "https://coral2.quark.cn/quark/carbon/v1/signIn?" + this.carbon.params,
-        type: "post",
-        body: this.carbon.body
-      };
-      let _0x7dd2f4 = await this.fetch(_0x37838b),
-        _0x2754eb = _0x7dd2f4?.["msg"] || _0x7dd2f4?.["data"]?.["prizes"]?.[0]?.["rewardItem"]?.["name"];
-      $.log("[" + (this.userName || this.index) + "][INFO] 低碳签到: " + _0x2754eb + "\n");
-      return _0x2754eb;
-    } catch (_0x37ff70) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 低碳签到: " + _0x37ff70 + "\n");
-    }
-  }
-  async carbonCoin() {
-    try {
-      const _0x4cdaa7 = {
-        url: "https://coral2.quark.cn/quark/carbon/v1/home",
-        params: {}
-      };
-      _0x4cdaa7.params.appId = "quark_carbon_account_task";
-      _0x4cdaa7.params.kps = this.kps;
-      let _0x1d0aa7 = await this.fetch(_0x4cdaa7);
-      return _0x1d0aa7?.["data"]?.["userEnergyData"]["amount"];
-    } catch (_0x2cf0c6) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 低碳签到: " + _0x2cf0c6 + "\n");
-    }
-  }
-  async carbonTravelQuery() {
-    try {
-      const _0x1b3c44 = {
-        url: "https://coral2.quark.cn/quark/carbon/v1/travel/query",
-        params: {}
-      };
-      _0x1b3c44.params.pr = "ucpro";
-      _0x1b3c44.params.fr = "pc";
-      _0x1b3c44.params.uc_param_str = "";
-      _0x1b3c44.params.appId = "quark_carbon_account_travel";
-      _0x1b3c44.params.kps = this.kps;
-      let _0x2395ea = await this.fetch(_0x1b3c44),
-        _0x3f51f1 = _0x2395ea?.["data"]?.["categoryList"],
-        _0x3edbab = [];
-      if (_0x3f51f1?.["length"]) {
-        _0x3edbab = _0x3f51f1.map(_0x2b599e => {
-          const _0xe23566 = {
-            name: _0x2b599e.name,
-            category: _0x2b599e.category,
-            value: _0x2b599e.vitality
-          };
-          return _0xe23566;
-        }).sort((_0x50bfe6, _0x1998fe) => _0x1998fe.value - _0x50bfe6.value);
-        $.log("[" + (this.userName || this.index) + "][INFO] 查询出行地点成功!\n");
-      }
-      return _0x3edbab;
-    } catch (_0x45b142) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 低碳出行: " + _0x45b142 + "\n");
-    }
-  }
-  async carbonTravel(_0x4a95aa = "") {
-    try {
-      let _0xdad94a = {
-          url: "https://coral2.quark.cn/quark/carbon/v1/travel/travel",
-          params: {
-            pr: "ucpro",
-            fr: "pc",
-            uc_param_str: ""
-          },
-          type: "post",
-          body: {
-            appId: "quark_carbon_account_travel",
-            kps: this.kps,
-            category: _0x4a95aa || "wetlandprotection"
-          }
-        },
-        _0x559d63 = await this.fetch(_0xdad94a);
-      if (_0x559d63?.["msg"] && _0x559d63?.["msg"]["match"](/余额不足/)) {
-        _0x559d63.msg = "余额不足";
-      }
-      let _0x5048c1 = "低碳出行: " + (_0x559d63?.["msg"] || _0x559d63?.["data"]?.["destination"]?.["destinationShowName"] || "出行成功");
-      $.log("[" + (this.userName || this.index) + "][INFO] " + _0x5048c1 + "\n");
-      $.notifyMsg.push(_0x5048c1);
-    } catch (_0x2eb2f5) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 低碳出行: " + _0x2eb2f5 + "\n");
-    }
-  }
-  async getReceiveEngeryList() {
-    try {
-      const _0x32998d = {
-        url: "https://coral2.quark.cn/quark/carbon/v1/home",
-        params: {}
-      };
-      _0x32998d.params.pr = "ucpro";
-      _0x32998d.params.fr = "pc";
-      _0x32998d.params.uc_param_str = "";
-      _0x32998d.params.appId = "quark_carbon_account_task";
-      _0x32998d.params.kps = this.kps;
-      let _0x155e1b = await this.fetch(_0x32998d);
-      return _0x155e1b?.["data"]?.["receiveEnergyList"];
-    } catch (_0x3b6b48) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 低碳出行查询能量列表: " + _0x3b6b48 + "\n");
-    }
-  }
-  async receiveEngery(_0x57ed5b) {
-    try {
-      const _0x456584 = {
-        url: "https://coral2.quark.cn/quark/carbon/v1/receiveEnergy",
-        params: {},
-        type: "post",
-        body: {}
-      };
-      _0x456584.params.pr = "ucpro";
-      _0x456584.params.fr = "pc";
-      _0x456584.params.uc_param_str = "";
-      _0x456584.body.appId = "quark_carbon_account_task";
-      _0x456584.body.kps = this.kps;
-      _0x456584.body.recordIds = _0x57ed5b;
-      let _0x2c573b = await this.fetch(_0x456584);
-      $.log("[" + (this.userName || this.index) + "][INFO] 收集能量成功!获得" + _0x2c573b?.["data"][0]?.["amount"] / 100 + "g\n");
-    } catch (_0x2abf51) {
-      this.ckStatus = false;
-      $.log("[" + (this.userName || this.index) + "][ERROR] 低碳空间收集能量: " + _0x2abf51 + "\n");
+    } catch (_0x3b913e) {
+      console.log(_0x3b913e);
     }
   }
 }
@@ -402,234 +179,122 @@ async function getCookie() {
     if ($request && $request.method === "OPTIONS") {
       return;
     }
-    if (!$request.headers) {
-      throw new Error("错误的运行方式，请切换到cron环境");
+    const {
+      openid: _0x304c21
+    } = UrlToJson($request.body) ?? {};
+    let _0x23315f = /^https:\/\/game\.dominos\.com\.cn\/(.+)\/game\/gameDone/;
+    const [, _0xfa3eb6] = _0x23315f.exec($request.url);
+    if (!($request.body && _0xfa3eb6)) {
+      throw new Error("❌获取签到Cookie失败!");
     }
-    if ($request.url.match(/clouddrive\/file\/sort/)) {
-      await _0x4fbed5();
-    } else {
-      if ($request.url.match(/task\/trigger/)) {
-        _0x3b84bb();
-      } else {
-        $request.url.match(/sleep\/trigger/) ? _0x473d85() : _0x580ed1();
-      }
-    }
-    $.setjson(userCookie, ckName);
-    async function _0x4fbed5() {
-      try {
-        const _0x38c9e8 = ObjectKeys2LowerCase($request.headers) ?? "";
-        let _0x5a79f3 = _0x38c9e8.cookie,
-          _0x42d583 = await getUserInfo(_0x5a79f3);
-        if (!_0x42d583 || !_0x5a79f3) {
-          throw new Error("获取用户信息失败,数据缺失");
-        }
-        const _0x1bcfba = userCookie.findIndex(_0x497365 => _0x497365.userName == _0x42d583),
-          _0x3143d9 = {
-            userId: _0x42d583,
-            userName: _0x42d583,
-            token: _0x5a79f3
-          };
-        userCookie[_0x1bcfba] ? userCookie[_0x1bcfba] = {
-          ...userCookie[_0x1bcfba],
-          userId: _0x3143d9.userId,
-          userName: _0x3143d9.userName,
-          token: _0x3143d9.token
-        } : userCookie.push(_0x3143d9);
-        $.setdata(_0x42d583, "quark_user");
-        $.msg($.name, "🎉" + _0x3143d9.userName + "更新token成功!", "当前获取ck信息对象:" + ($.quark_user || "未选择") + " => " + _0x3143d9.userName);
-      } catch (_0x5bbd21) {
-        throw _0x5bbd21;
-      }
-    }
-    function _0x580ed1() {
-      try {
-        const _0x31f41b = userCookie.findIndex(_0x16a27e => _0x16a27e.userName == $.quark_user);
-        if (!$.quark_user || _0x31f41b == -1) {
-          throw new Error("未查询到当前用户，请先扫码登录获取token");
-        }
-        const _0x5a068f = $request.url.match(/welfare/),
-          {
-            kps: _0x1c5a81
-          } = _0x5a068f ? getQueries($request.url) : UrlToJson($request.body);
-        if (!_0x1c5a81) {
-          throw new Error("获取用户信息失败,kps不存在");
-        }
-        const _0x547b90 = _0x5a068f ? "welfare" : "carbon";
-        userCookie[_0x31f41b].kps = _0x1c5a81;
-        userCookie[_0x31f41b][_0x547b90] = {
-          params: $request.url.split("?")[1],
-          body: $request.body
-        };
-        $.msg($.name, "🎉" + $.quark_user + "收录" + _0x547b90 + "任务成功!", "");
-      } catch (_0xf34cc6) {
-        throw _0xf34cc6;
-      }
-    }
-    function _0x3b84bb() {
-      try {
-        const _0x509888 = userCookie.findIndex(_0x591f3d => _0x591f3d.userName == $.quark_user);
-        if (!$.quark_user || _0x509888 == -1) {
-          throw new Error("未查询到当前用户，请先扫码登录获取token");
-        }
-        const {
-          tid: _0x117d3c
-        } = getQueries($request.url) ?? {};
-        let _0x5efa9a = $.toObj($response.body),
-          _0x461b95 = _0x5efa9a?.["data"]?.["curTask"]?.["name"];
-        if (_0x117d3c == "1776281") {
-          return $.msg($.name, "⛔️ " + $.quark_user + "收录任务信息失败!", "任务名称:" + _0x461b95 + "\n失败原因:不支持" + _0x461b95 + ",请获取其它任务");
-        }
-        const [, _0xc82265] = $request.url.split("?");
-        if (!userCookie[_0x509888].taskTrigger) {
-          userCookie[_0x509888].taskTrigger = {};
-        }
-        const _0x48096c = {
-          name: _0x461b95,
-          params: _0xc82265
-        };
-        userCookie[_0x509888].taskTrigger[_0x117d3c] = _0x48096c;
-        $.msg($.name, "🎉" + $.quark_user + "收录福利空间日常任务成功!", "任务名称: " + _0x461b95 + "\n任务编号: " + _0x117d3c);
-      } catch (_0xb4e636) {
-        throw _0xb4e636;
-      }
-    }
-    function _0x473d85() {
-      try {
-        const _0x1a0812 = userCookie.findIndex(_0x1dd491 => _0x1dd491.userName == $.quark_user);
-        if (!$.quark_user || _0x1a0812 == -1) {
-          throw new Error("未查询到当前用户，请先扫码登录获取token");
-        }
-        const {
-          state: _0x2cea49
-        } = UrlToJson($request.body);
-        if (!userCookie[_0x1a0812].sleepTrigger) {
-          userCookie[_0x1a0812].sleepTrigger = {};
-        }
-        userCookie[_0x1a0812].sleepTrigger[_0x2cea49] = {
-          params: $request.url.split("?")[1],
-          body: $request.body
-        };
-        $.msg($.name, "🎉" + $.quark_user + "收录" + _0x2cea49 + "任务成功!", "");
-      } catch (_0x105de9) {
-        throw _0x105de9;
-      }
-    }
-  } catch (_0x39d2e4) {
-    throw _0x39d2e4;
-  }
-}
-async function getUserInfo(_0x396a2e) {
-  try {
-    const _0x86e76b = {
-      url: "https://pan.quark.cn/account/info?fr=h5&platform=others",
-      headers: {}
+    const _0x24662b = {
+      userId: _0x304c21,
+      token: $request.body,
+      userName: _0x304c21
     };
-    _0x86e76b.headers.Cookie = _0x396a2e;
-    _0x86e76b.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0";
-    let _0x3334a4 = await Request(_0x86e76b);
-    return _0x3334a4?.["data"]?.["nickname"];
-  } catch (_0x5f39bf) {
-    this.ckStatus = false;
-    $.log("[" + (this.userName || this.index) + "][ERROR] 查询用户信息失败:" + _0x5f39bf + "\n");
+    userCookie = $.toObj(userCookie) || [];
+    const _0x47ac11 = userCookie.findIndex(_0x2c17b1 => _0x2c17b1.userId == _0x24662b.userId);
+    userCookie[_0x47ac11] ? userCookie[_0x47ac11] = _0x24662b : userCookie.push(_0x24662b);
+    $.setdata(_0xfa3eb6, "dlm_game");
+    $.setjson(userCookie, ckName);
+    $.msg($.name, "🎉获取签到Cookie成功!", "openid: " + _0x304c21 + "\ngame: " + _0xfa3eb6);
+  } catch (_0x2cb067) {
+    throw _0x2cb067;
   }
-}
-function getQueries(_0x39d22) {
-  const [, _0x5b6647] = _0x39d22.split("?");
-  return _0x5b6647 ? _0x5b6647.split("&").reduce((_0x12b5e4, _0x3f7814) => {
-    var [_0x1474df, _0x3f7814] = _0x3f7814.split("=");
-    _0x12b5e4[_0x1474df] = _0x3f7814;
-    return _0x12b5e4;
-  }, {}) : {};
-}
-function UrlToJson(_0x2e0263) {
-  let _0x30974d = _0x2e0263.split("&"),
-    _0x2a4511 = {};
-  for (let _0x559793 of _0x30974d) {
-    let _0x101885 = _0x559793.split("="),
-      _0x256111 = _0x101885[0],
-      _0x351837 = decodeURIComponent(_0x101885[1]);
-    _0x2a4511["" + _0x256111] = _0x351837;
-  }
-  return _0x2a4511;
 }
 !(async () => {
-  try {
-    typeof $request != "undefined" ? await getCookie() : (await checkEnv(), await main());
-  } catch (_0x336307) {
-    throw _0x336307;
+  if (typeof $request != "undefined") {
+    await getCookie();
+    return;
   }
-})().catch(_0x15c001 => {
-  $.logErr(_0x15c001);
-  $.msg($.name, "⛔️ script run error!", _0x15c001.message || _0x15c001);
-}).finally(async () => {
-  const _0x759a76 = {
-    ok: 1
-  };
-  $.done(_0x759a76);
+  if (!(await loadModule())) {
+    throw new Error("❌加载模块失败，请检查模块路径是否正常");
+  }
+  await checkEnv();
+  await main();
+})().catch(_0x22d900 => $.notifyMsg.push(_0x22d900.message || _0x22d900)).finally(async () => {
+  await SendMsg($.notifyMsg.join("\n"));
+  $.done();
 });
-async function sendMsg(a, e) {
-  a && ($.isNode() ? await notify.sendNotify($.name, a) : $.msg($.name, $.title || "", a, e));
+function UrlToJson(_0x2bbe5d) {
+  let _0x4d8917 = _0x2bbe5d.split("&"),
+    _0x27119e = {};
+  for (let _0x280d66 of _0x4d8917) {
+    let _0x5e97fc = _0x280d66.split("="),
+      _0x39535e = _0x5e97fc[0],
+      _0x1e6b54 = decodeURIComponent(_0x5e97fc[1]);
+    _0x27119e["" + _0x39535e] = _0x1e6b54;
+  }
+  return _0x27119e;
 }
-function DoubleLog(o) {
-  o && ($.log(`${o}`), $.notifyMsg.push(`${o}`));
+function DoubleLog(_0x4e8eae) {
+  $.isNode() ? _0x4e8eae && (console.log("" + _0x4e8eae), $.notifyMsg.push("" + _0x4e8eae)) : (console.log("" + _0x4e8eae), $.notifyMsg.push("" + _0x4e8eae));
+}
+function randomInt(_0x1c8171, _0x358abd) {
+  return Math.round(Math.random() * (_0x358abd - _0x1c8171) + _0x1c8171);
+}
+async function SendMsg(_0x148fec) {
+  if (!_0x148fec) {
+    return;
+  }
+  Notify > 0 ? $.isNode() ? await notify.sendNotify($.name, _0x148fec) : $.msg($.name, $.gameDate ? "活动时间:" + $.gameDate : "", _0x148fec) : console.log(_0x148fec);
+}
+async function loadModule() {
+  $.SakuraUtils = await loadSakuraUtils();
+  return $.SakuraUtils ? true : false;
 }
 async function checkEnv() {
   try {
     if (!userCookie?.length) {
       throw new Error("no available accounts found");
     }
-    $.log(`\n[INFO]检测到 ${userCookie?.length ?? 0} 个账号\n`);
+    $.log(`\n[INFO] 检测到 ${userCookie?.length ?? 0} 个账号\n`);
     $.userList.push(...userCookie.map(o => new UserInfo(o)).filter(Boolean));
   } catch (o) {
     throw o;
   }
 }
-function debug(g, e = "debug") {
-  "true" === $.is_debug && ($.log(`\n-----------${e}------------\n`), $.log("string" == typeof g ? g : $.toStr(g) || `debug error => t=${g}`), $.log(`\n-----------${e}------------\n`));
-}
-function ObjectKeys2LowerCase(obj) {
-  return !obj ? {} : Object.fromEntries(Object.entries(obj).map(([k, v]) => [k.toLowerCase(), v]));
-}
-async function Request(t) {
-  "string" == typeof t && (t = {
-    url: t
-  });
-  try {
-    if (!t?.url) {
-      throw new Error("[URL][ERROR]缺少 url 参数");
-    }
-    let {
-      url: o,
-      type: e,
-      headers: r = {},
-      body: s,
-      params: a,
-      dataType: n = "form",
-      resultType: u = "data"
-    } = t;
-    const p = e ? e?.toLowerCase() : "body" in t ? "post" : "get",
-      c = o.concat("post" === p ? "?" + $.queryStr(a) : ""),
-      i = t.timeout ? $.isSurge() ? t.timeout / 1000 : t.timeout : 10000;
-    "json" === n && (r["Content-Type"] = "application/json;charset=UTF-8");
-    const y = "string" == typeof s ? s : s && "form" == n ? $.queryStr(s) : $.toStr(s),
-      l = {
-        ...t,
-        ...(t?.opts ? t.opts : {}),
-        url: c,
-        headers: r,
-        ...("post" === p && {
-          body: y
-        }),
-        ...("get" === p && a && {
-          params: a
-        }),
-        timeout: i
-      },
-      m = $.http[p.toLowerCase()](l).then(t => "data" == u ? $.toObj(t.body) || t.body : $.toObj(t) || t).catch(t => $.log(`[${p.toUpperCase()}][ERROR]${t}\n`));
-    return Promise.race([new Promise((t, o) => setTimeout(() => o("当前请求已超时"), i)), m]);
-  } catch (t) {
-    console.log(`[${p.toUpperCase()}][ERROR]${t}\n`);
+async function loadSakuraUtils() {
+  let code = ($.isNode() ? process.env.SakuraUtil_code : $.getdata("SakuraUtil_code")) || "";
+  if (code && Object.keys(code).length) {
+    console.log(`✅${$.name}:缓存中存在SakuraUtil代码,跳过下载`);
+    eval(code);
+    return creatUtils();
   }
+  console.log(`🚀${$.name}:开始下载SakuraUtil代码`);
+  return new Promise(async resolve => {
+    $.getScript("https://cdn.jsdelivr.net/gh/Sliverkiss/QuantumultX@main/Utils/SakuraUtil.js").then(fn => {
+      $.setdata(fn, "SakuraUtil_code");
+      eval(fn);
+      const SakuraUtil = creatUtils();
+      console.log(`✅SakuraUtil加载成功,请继续`);
+      resolve(SakuraUtil);
+    });
+  });
+}
+function httpRequest(options, method) {
+  typeof method === "undefined" ? "body" in options ? method = "post" : method = "get" : method = method;
+  return new Promise(resolve => {
+    $[method](options, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${method}请求失败`);
+          $.logErr(err);
+        } else {
+          if (data) {
+            typeof $.toObj(data) == "object" ? data = $.toObj(data) : data = data;
+            resolve(data);
+          } else {
+            console.log(`请求api返回数据为空，请检查自身原因`);
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
 }
 function Env(t, e) {
   class s {
