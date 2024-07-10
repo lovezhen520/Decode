@@ -1,3 +1,5 @@
+//7/10/2024, 9:51:08 PM
+//Author:https://github.com/lck7
 const YZ_0x4185e2 = new YZ_0x1d5d88("酷我音乐"),
   YZ_0x4a7e4c = new YZ_0x42289f(),
   YZ_0x369dd2 = "/mobi.s?f=kwxs",
