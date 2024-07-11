@@ -1,38 +1,5 @@
-//7/11/2024, 10:48:27 AM
+//7/11/2024, 10:49:27 AM
 //Author:https://github.com/lck7
-/*
-APP：酷我音乐
-版本：10.6.6
-作者：General℡
-
-脚本功能：看广告，获取更多的免费听歌时间！
-
-操作：1️⃣看一个广告后等提示再看浏览一个广告并点击获取到Cookie!获取完后关掉重写，避免不必要的MITM
-2️⃣首次运行先清除一次变量，再去获取Cookie
-
-
-注意⚠️：当前脚本只测试Loon，其他自测！
-可配合其他酷我音乐会员脚本去掉部分广告（没时间搞广告）
-
-没事儿别退出登录，容易掉接口（虽然还可以刷，一旦Cookies到期，就会找不到入口）
-新号可能没有这个免费听歌的入口，暂时不清楚具体原因
-
-
-使用声明：⚠️⚠️⚠️此脚本仅供学习与交流，
-        请勿转载与贩卖！⚠️⚠️⚠️
-
-[Script]
-http-request ^https:\/\/wapi\.kuwo\.cn\/openapi\/v1\/user\/freemium\/h5\/switches\? script-path=https://raw.githubusercontent.com/General74110/Quantumult-X/master/Task/Kuwomusic.js, requires-body=true, timeout=10, enabled=true, tag=酷我音乐刷时长获取Cookie, img-url=https://raw.githubusercontent.com/LovedGM/Quantumult-X-TuBiao/main/zishi-cs/zs23.png
-
-
-[Task]
-cron 3 6 * * * script-path=https://raw.githubusercontent.com/General74110/Quantumult-X/master/Task/Kuwomusic.js, timeout=10, tag=酷我音乐刷时长, img-url=https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Social_Media/Bebo.png
-
-
-[MITM]
-hostname = wapi.kuwo.cn
-
-*/
 const $ = new Env("\u9177\u6211\u97F3\u4E50");
 const Clear = 0; // 0为关闭清除，1为开启清除
 var _0xodG = "jsjiami.com.v7";
@@ -932,4 +899,3 @@ function Env(t, e) {
     }
   }(t, e);
 }
-/*****************************************************************************/
