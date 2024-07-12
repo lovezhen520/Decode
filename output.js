@@ -1,4 +1,4 @@
-//7/13/2024, 1:15:45 AM
+//7/13/2024, 1:21:57 AM
 //Author:https://github.com/lck7
 class l {
   static name = "Lodash";
@@ -682,47 +682,14 @@ class u {
     return l;
   }
 }
-class e {
-  static name = "URI";
-  static version = "1.2.7";
-  static about() {
-    return console.log(`\n🟧 ${this.name} v${this.version}\n`);
-  }
-  static #t = {
-    scheme: "",
-    host: "",
-    path: "",
-    query: {}
-  };
-  static parse(l) {
-    let n = l.match(/(?:(?<scheme>.+):\/\/(?<host>[^/]+))?\/?(?<path>[^?]+)?\??(?<query>[^?]+)?/)?.groups ?? null;
-    n?.path ? n.paths = n.path.split("/") : n.path = "";
-    if (n?.paths) {
-      const l = n.paths[n.paths.length - 1];
-      if (l?.includes(".")) {
-        const u = l.split(".");
-        n.format = u[u.length - 1];
-      }
-    }
-    n?.query && (n.query = Object.fromEntries(n.query.split("&").map(l => l.split("="))));
-    return n;
-  }
-  static stringify(l = this.#t) {
-    let n = "";
-    l?.scheme && l?.host && (n += l.scheme + "://" + l.host);
-    l?.path && (l?.host ? n += "/" + l.path : n += l.path);
-    l?.query && (n += "?" + Object.entries(l.query).map(l => l.join("=")).join("&"));
-    return n;
-  }
-}
-var t = {
+var e = {
     Switch: !0,
     Type: "Translate",
     Types: ["Official", "Translate"],
     Languages: ["EN", "ZH"],
     CacheSize: 50
   },
-  a = {
+  t = {
     breakLine: {
       "text/xml": "&#x000A;",
       "application/xml": "&#x000A;",
@@ -732,11 +699,11 @@ var t = {
       "application/json": "\n"
     }
   },
-  s = {
-    Settings: t,
-    Configs: a
+  a = {
+    Settings: e,
+    Configs: t
   },
-  r = {
+  s = {
     Switch: !0,
     Type: "Official",
     Types: ["Translate", "External"],
@@ -744,7 +711,7 @@ var t = {
     AutoCC: !0,
     ShowOnly: !1
   },
-  i = {
+  r = {
     Languages: {
       BG: "bg-BG",
       CS: "cs",
@@ -2305,30 +2272,30 @@ var t = {
       }]
     }
   },
-  o = {
-    Settings: r,
-    Configs: i
+  i = {
+    Settings: s,
+    Configs: r
   },
-  g = Database = {
+  o = Database = {
     Default: Object.freeze({
       __proto__: null,
-      Configs: a,
-      Settings: t,
-      default: s
+      Configs: t,
+      Settings: e,
+      default: a
     }),
     YouTube: Object.freeze({
       __proto__: null,
-      Configs: i,
-      Settings: r,
-      default: o
+      Configs: r,
+      Settings: s,
+      default: i
     })
   };
-var c,
-  f = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : {},
+var g,
+  c = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : {},
   d = {
     exports: {}
   },
-  h = {
+  f = {
     exports: {}
   };
 !function (l) {
@@ -2337,7 +2304,7 @@ var c,
       return n <= l && l <= u;
     }
     if (l.exports && !n["encoding-indexes"]) {
-      n["encoding-indexes"] = (c || (c = 1, function (l) {
+      n["encoding-indexes"] = (g || (g = 1, function (l) {
         !function (n) {
           l.exports && (l.exports = n);
           n["encoding-indexes"] = {
@@ -2375,8 +2342,8 @@ var c,
             "windows-1258": [8364, 129, 8218, 402, 8222, 8230, 8224, 8225, 710, 8240, 138, 8249, 338, 141, 142, 143, 144, 8216, 8217, 8220, 8221, 8226, 8211, 8212, 732, 8482, 154, 8250, 339, 157, 158, 376, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 258, 196, 197, 198, 199, 200, 201, 202, 203, 768, 205, 206, 207, 272, 209, 777, 211, 212, 416, 214, 215, 216, 217, 218, 219, 220, 431, 771, 223, 224, 225, 226, 259, 228, 229, 230, 231, 232, 233, 234, 235, 769, 237, 238, 239, 273, 241, 803, 243, 244, 417, 246, 247, 248, 249, 250, 251, 252, 432, 8363, 255],
             "x-mac-cyrillic": [1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 8224, 176, 1168, 163, 167, 8226, 182, 1030, 174, 169, 8482, 1026, 1106, 8800, 1027, 1107, 8734, 177, 8804, 8805, 1110, 181, 1169, 1032, 1028, 1108, 1031, 1111, 1033, 1113, 1034, 1114, 1112, 1029, 172, 8730, 402, 8776, 8710, 171, 187, 8230, 160, 1035, 1115, 1036, 1116, 1109, 8211, 8212, 8220, 8221, 8216, 8217, 247, 8222, 1038, 1118, 1039, 1119, 8470, 1025, 1105, 1103, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099, 1100, 1101, 1102, 8364]
           };
-        }(f || {});
-      }(h)), h.exports)["encoding-indexes"];
+        }(c || {});
+      }(f)), f.exports)["encoding-indexes"];
     }
     var e = Math.floor;
     function t(l) {
@@ -2420,13 +2387,13 @@ var c,
       }
     };
     var o = -1;
-    function g(l, n) {
+    function d(l, n) {
       if (l) {
         throw TypeError("Decoder error");
       }
       return n || 65533;
     }
-    function d(l) {
+    function h(l) {
       throw TypeError("The code point " + l + " could not be encoded.");
     }
     function m(l) {
@@ -2586,15 +2553,15 @@ var c,
     var y,
       N,
       w = {},
-      x = {};
-    function T(l, n) {
+      T = {};
+    function k(l, n) {
       return n && n[l] || null;
     }
-    function C(l, n) {
+    function x(l, n) {
       var u = n.indexOf(l);
       return -1 === u ? null : u;
     }
-    function k(l) {
+    function C(l) {
       if (!("encoding-indexes" in n)) {
         throw Error("Indexes missing. Did you forget to include encoding-indexes.js first?");
       }
@@ -2617,7 +2584,7 @@ var c,
       if (null === u || "replacement" === u.name) {
         throw RangeError("Unknown encoding: " + l);
       }
-      if (!x[u.name]) {
+      if (!T[u.name]) {
         throw Error("Decoder not present. Did you forget to include encoding-indexes.js first?");
       }
       var e = this;
@@ -2660,55 +2627,55 @@ var c,
         a = 0,
         s = 128,
         i = 191;
-      this.handler = function (l, c) {
-        if (c === r && 0 !== a) {
+      this.handler = function (l, g) {
+        if (g === r && 0 !== a) {
           a = 0;
-          return g(n);
+          return d(n);
         }
-        if (c === r) {
+        if (g === r) {
           return o;
         }
         if (0 === a) {
-          if (u(c, 0, 127)) {
-            return c;
+          if (u(g, 0, 127)) {
+            return g;
           }
-          if (u(c, 194, 223)) {
+          if (u(g, 194, 223)) {
             a = 1;
-            e = 31 & c;
+            e = 31 & g;
           } else {
-            if (u(c, 224, 239)) {
-              224 === c && (s = 160);
-              237 === c && (i = 159);
+            if (u(g, 224, 239)) {
+              224 === g && (s = 160);
+              237 === g && (i = 159);
               a = 2;
-              e = 15 & c;
+              e = 15 & g;
             } else {
-              if (!u(c, 240, 244)) {
-                return g(n);
+              if (!u(g, 240, 244)) {
+                return d(n);
               }
-              240 === c && (s = 144);
-              244 === c && (i = 143);
+              240 === g && (s = 144);
+              244 === g && (i = 143);
               a = 3;
-              e = 7 & c;
+              e = 7 & g;
             }
           }
           return null;
         }
-        if (!u(c, s, i)) {
+        if (!u(g, s, i)) {
           e = a = t = 0;
           s = 128;
           i = 191;
-          l.prepend(c);
-          return g(n);
+          l.prepend(g);
+          return d(n);
         }
         s = 128;
         i = 191;
-        e = e << 6 | 63 & c;
+        e = e << 6 | 63 & g;
         if ((t += 1) !== a) {
           return null;
         }
-        var f = e;
+        var c = e;
         e = a = t = 0;
-        return f;
+        return c;
       };
     }
     function O(l) {
@@ -2740,7 +2707,7 @@ var c,
           return e;
         }
         var t = l[e - 128];
-        return null === t ? g(u) : t;
+        return null === t ? d(u) : t;
       };
     }
     function j(l, n) {
@@ -2752,12 +2719,12 @@ var c,
         if (s(u)) {
           return u;
         }
-        var e = C(u, l);
-        null === e && d(u);
+        var e = x(u, l);
+        null === e && h(u);
         return e + 128;
       };
     }
-    function A(l) {
+    function L(l) {
       var n = l.fatal,
         e = 0,
         t = 0,
@@ -2766,11 +2733,11 @@ var c,
         if (i === r && 0 === e && 0 === t && 0 === s) {
           return o;
         }
-        var c;
-        i !== r || 0 === e && 0 === t && 0 === s || (e = 0, t = 0, s = 0, g(n));
+        var g;
+        i !== r || 0 === e && 0 === t && 0 === s || (e = 0, t = 0, s = 0, d(n));
         if (0 !== s) {
-          c = null;
-          u(i, 48, 57) && (c = function (l) {
+          g = null;
+          u(i, 48, 57) && (g = function (l) {
             if (l > 39419 && l < 189e3 || l > 1237575) {
               return null;
             }
@@ -2780,7 +2747,7 @@ var c,
             var n,
               u = 0,
               e = 0,
-              t = k("gb18030-ranges");
+              t = C("gb18030-ranges");
             for (n = 0; n < t.length; ++n) {
               var a = t[n];
               if (!(a[0] <= l)) {
@@ -2791,32 +2758,32 @@ var c,
             }
             return e + l - u;
           }(10 * (126 * (10 * (e - 129) + t - 48) + s - 129) + i - 48));
-          var f = [t, s, i];
+          var c = [t, s, i];
           e = 0;
           t = 0;
           s = 0;
-          return null === c ? (l.prepend(f), g(n)) : c;
+          return null === g ? (l.prepend(c), d(n)) : g;
         }
         if (0 !== t) {
-          return u(i, 129, 254) ? (s = i, null) : (l.prepend([t, i]), e = 0, t = 0, g(n));
+          return u(i, 129, 254) ? (s = i, null) : (l.prepend([t, i]), e = 0, t = 0, d(n));
         }
         if (0 !== e) {
           if (u(i, 48, 57)) {
             t = i;
             return null;
           }
-          var d = e,
+          var f = e,
             h = null;
           e = 0;
           var m = i < 127 ? 64 : 65;
-          (u(i, 64, 126) || u(i, 128, 254)) && (h = 190 * (d - 129) + (i - m));
-          null === (null === h ? c = null : c = T(h, k("gb18030"))) && a(i) && l.prepend(i);
-          return null === c ? g(n) : c;
+          (u(i, 64, 126) || u(i, 128, 254)) && (h = 190 * (f - 129) + (i - m));
+          null === (null === h ? g = null : g = k(h, C("gb18030"))) && a(i) && l.prepend(i);
+          return null === g ? d(n) : g;
         }
-        return a(i) ? i : 128 === i ? 8364 : u(i, 129, 254) ? (e = i, null) : g(n);
+        return a(i) ? i : 128 === i ? 8364 : u(i, 129, 254) ? (e = i, null) : d(n);
       };
     }
-    function L(l, n) {
+    function A(l, n) {
       l.fatal;
       this.handler = function (l, u) {
         if (u === r) {
@@ -2826,18 +2793,18 @@ var c,
           return u;
         }
         if (58853 === u) {
-          return d(u);
+          return h(u);
         }
         if (n && 8364 === u) {
           return 128;
         }
-        var t = C(u, k("gb18030"));
+        var t = x(u, C("gb18030"));
         if (null !== t) {
           var a = t % 190;
           return [e(t / 190) + 129, a + (a < 63 ? 64 : 65)];
         }
         if (n) {
-          return d(u);
+          return h(u);
         }
         t = function (l) {
           if (59335 === l) {
@@ -2846,7 +2813,7 @@ var c,
           var n,
             u = 0,
             e = 0,
-            t = k("gb18030-ranges");
+            t = C("gb18030-ranges");
           for (n = 0; n < t.length; ++n) {
             var a = t[n];
             if (!(a[1] <= l)) {
@@ -2869,7 +2836,7 @@ var c,
       this.handler = function (l, t) {
         if (t === r && 0 !== e) {
           e = 0;
-          return g(n);
+          return d(n);
         }
         if (t === r && 0 === e) {
           return o;
@@ -2878,8 +2845,8 @@ var c,
           var s = e,
             i = null;
           e = 0;
-          var c = t < 127 ? 64 : 98;
-          switch ((u(t, 64, 126) || u(t, 161, 254)) && (i = 157 * (s - 129) + (t - c)), i) {
+          var g = t < 127 ? 64 : 98;
+          switch ((u(t, 64, 126) || u(t, 161, 254)) && (i = 157 * (s - 129) + (t - g)), i) {
             case 1133:
               {
                 return [202, 772];
@@ -2897,14 +2864,14 @@ var c,
                 return [234, 780];
               }
           }
-          var f = null === i ? null : T(i, k("big5"));
-          null === f && a(t) && l.prepend(t);
-          return null === f ? g(n) : f;
+          var c = null === i ? null : k(i, C("big5"));
+          null === c && a(t) && l.prepend(t);
+          return null === c ? d(n) : c;
         }
-        return a(t) ? t : u(t, 129, 254) ? (e = t, null) : g(n);
+        return a(t) ? t : u(t, 129, 254) ? (e = t, null) : d(n);
       };
     }
-    function $(l) {
+    function _(l) {
       l.fatal;
       this.handler = function (l, n) {
         if (n === r) {
@@ -2914,31 +2881,31 @@ var c,
           return n;
         }
         var u = function (l) {
-          N = N || k("big5").map(function (l, n) {
+          N = N || C("big5").map(function (l, n) {
             return n < 5024 ? null : l;
           });
           var n = N;
-          return 9552 === l || 9566 === l || 9569 === l || 9578 === l || 21313 === l || 21317 === l ? n.lastIndexOf(l) : C(l, n);
+          return 9552 === l || 9566 === l || 9569 === l || 9578 === l || 21313 === l || 21317 === l ? n.lastIndexOf(l) : x(l, n);
         }(n);
         if (null === u) {
-          return d(n);
+          return h(n);
         }
         var t = e(u / 157) + 129;
         if (t < 161) {
-          return d(n);
+          return h(n);
         }
         var a = u % 157;
         return [t, a + (a < 63 ? 64 : 98)];
       };
     }
-    function _(l) {
+    function $(l) {
       var n = l.fatal,
         e = !1,
         t = 0;
       this.handler = function (l, s) {
         if (s === r && 0 !== t) {
           t = 0;
-          return g(n);
+          return d(n);
         }
         if (s === r && 0 === t) {
           return o;
@@ -2955,13 +2922,13 @@ var c,
         if (0 !== t) {
           var i = t;
           t = 0;
-          var c = null;
-          u(i, 161, 254) && u(s, 161, 254) && (c = T(94 * (i - 161) + (s - 161), k(e ? "jis0212" : "jis0208")));
+          var g = null;
+          u(i, 161, 254) && u(s, 161, 254) && (g = k(94 * (i - 161) + (s - 161), C(e ? "jis0212" : "jis0208")));
           e = !1;
           u(s, 161, 254) || l.prepend(s);
-          return null === c ? g(n) : c;
+          return null === g ? d(n) : g;
         }
-        return a(s) ? s : 142 === s || 143 === s || u(s, 161, 254) ? (t = s, null) : g(n);
+        return a(s) ? s : 142 === s || 143 === s || u(s, 161, 254) ? (t = s, null) : d(n);
       };
     }
     function D(l) {
@@ -2985,80 +2952,80 @@ var c,
         if (8722 === n) {
           n = 65293;
         }
-        var t = C(n, k("jis0208"));
-        return null === t ? d(n) : [e(t / 94) + 161, t % 94 + 161];
+        var t = x(n, C("jis0208"));
+        return null === t ? h(n) : [e(t / 94) + 161, t % 94 + 161];
       };
     }
-    function F(l) {
+    function R(l) {
       var n = l.fatal,
         e = 0,
         t = 1,
         a = 2,
         s = 3,
         i = 4,
-        c = 5,
-        f = 6,
-        d = e,
+        g = 5,
+        c = 6,
+        f = e,
         h = e,
         m = 0,
         p = !1;
       this.handler = function (l, b) {
-        switch (d) {
+        switch (f) {
           default:
             {}
           case e:
             {
-              return 27 === b ? (d = c, null) : u(b, 0, 127) && 14 !== b && 15 !== b && 27 !== b ? (p = !1, b) : b === r ? o : (p = !1, g(n));
+              return 27 === b ? (f = g, null) : u(b, 0, 127) && 14 !== b && 15 !== b && 27 !== b ? (p = !1, b) : b === r ? o : (p = !1, d(n));
             }
           case t:
             {
-              return 27 === b ? (d = c, null) : 92 === b ? (p = !1, 165) : 126 === b ? (p = !1, 8254) : u(b, 0, 127) && 14 !== b && 15 !== b && 27 !== b && 92 !== b && 126 !== b ? (p = !1, b) : b === r ? o : (p = !1, g(n));
+              return 27 === b ? (f = g, null) : 92 === b ? (p = !1, 165) : 126 === b ? (p = !1, 8254) : u(b, 0, 127) && 14 !== b && 15 !== b && 27 !== b && 92 !== b && 126 !== b ? (p = !1, b) : b === r ? o : (p = !1, d(n));
             }
           case a:
             {
-              return 27 === b ? (d = c, null) : u(b, 33, 95) ? (p = !1, 65344 + b) : b === r ? o : (p = !1, g(n));
+              return 27 === b ? (f = g, null) : u(b, 33, 95) ? (p = !1, 65344 + b) : b === r ? o : (p = !1, d(n));
             }
           case s:
             {
-              return 27 === b ? (d = c, null) : u(b, 33, 126) ? (p = !1, m = b, d = i, null) : b === r ? o : (p = !1, g(n));
+              return 27 === b ? (f = g, null) : u(b, 33, 126) ? (p = !1, m = b, f = i, null) : b === r ? o : (p = !1, d(n));
             }
           case i:
             {
               if (27 === b) {
-                d = c;
-                return g(n);
+                f = g;
+                return d(n);
               }
               if (u(b, 33, 126)) {
-                d = s;
-                var y = T(94 * (m - 33) + b - 33, k("jis0208"));
-                return null === y ? g(n) : y;
+                f = s;
+                var y = k(94 * (m - 33) + b - 33, C("jis0208"));
+                return null === y ? d(n) : y;
               }
-              return b === r ? (d = s, l.prepend(b), g(n)) : (d = s, g(n));
+              return b === r ? (f = s, l.prepend(b), d(n)) : (f = s, d(n));
+            }
+          case g:
+            {
+              return 36 === b || 40 === b ? (m = b, f = c, null) : (l.prepend(b), p = !1, f = h, d(n));
             }
           case c:
-            {
-              return 36 === b || 40 === b ? (m = b, d = f, null) : (l.prepend(b), p = !1, d = h, g(n));
-            }
-          case f:
             {
               var N = m;
               m = 0;
               var w = null;
               if (40 === N && 66 === b && (w = e), 40 === N && 74 === b && (w = t), 40 === N && 73 === b && (w = a), 36 !== N || 64 !== b && 66 !== b || (w = s), null !== w) {
-                d = d = w;
-                var x = p;
+                f = f = w;
+                var T = p;
                 p = !0;
-                return x ? g(n) : null;
+                return T ? d(n) : null;
               }
               l.prepend([N, b]);
               p = !1;
-              d = h;
-              return g(n);
+              f = h;
+              return d(n);
             }
         }
       };
     }
-    function P(l) {
+    function F(l) {
       l.fatal;
       var n = 0,
         u = 1,
@@ -3074,7 +3041,7 @@ var c,
           return o;
         }
         if (!(a !== n && a !== u || 14 !== i && 15 !== i && 27 !== i)) {
-          return d(65533);
+          return h(65533);
         }
         if (a === n && s(i)) {
           return i;
@@ -3103,8 +3070,8 @@ var c,
         if (8722 === i) {
           i = 65293;
         }
-        var g = C(i, k("jis0208"));
-        return null === g ? d(i) : a !== t ? (l.prepend(i), a = t, [27, 36, 66]) : [e(g / 94) + 33, g % 94 + 33];
+        var g = x(i, C("jis0208"));
+        return null === g ? h(i) : a !== t ? (l.prepend(i), a = t, [27, 36, 66]) : [e(g / 94) + 33, g % 94 + 33];
       };
     }
     function V(l) {
@@ -3113,7 +3080,7 @@ var c,
       this.handler = function (l, t) {
         if (t === r && 0 !== e) {
           e = 0;
-          return g(n);
+          return d(n);
         }
         if (t === r && 0 === e) {
           return o;
@@ -3122,20 +3089,20 @@ var c,
           var s = e,
             i = null;
           e = 0;
-          var c = t < 127 ? 64 : 65,
-            f = s < 160 ? 129 : 193;
-          (u(t, 64, 126) || u(t, 128, 252)) && (i = 188 * (s - f) + t - c);
+          var g = t < 127 ? 64 : 65,
+            c = s < 160 ? 129 : 193;
+          (u(t, 64, 126) || u(t, 128, 252)) && (i = 188 * (s - c) + t - g);
           if (u(i, 8836, 10715)) {
             return 48508 + i;
           }
-          var d = null === i ? null : T(i, k("jis0208"));
-          null === d && a(t) && l.prepend(t);
-          return null === d ? g(n) : d;
+          var f = null === i ? null : k(i, C("jis0208"));
+          null === f && a(t) && l.prepend(t);
+          return null === f ? d(n) : f;
         }
-        return a(t) || 128 === t ? t : u(t, 161, 223) ? 65216 + t : u(t, 129, 159) || u(t, 224, 252) ? (e = t, null) : g(n);
+        return a(t) || 128 === t ? t : u(t, 161, 223) ? 65216 + t : u(t, 129, 159) || u(t, 224, 252) ? (e = t, null) : d(n);
       };
     }
-    function R(l) {
+    function P(l) {
       l.fatal;
       this.handler = function (l, n) {
         if (n === r) {
@@ -3157,13 +3124,13 @@ var c,
           n = 65293;
         }
         var t = function (l) {
-          y = y || k("jis0208").map(function (l, n) {
+          y = y || C("jis0208").map(function (l, n) {
             return u(n, 8272, 8835) ? null : l;
           });
           return y.indexOf(l);
         }(n);
         if (null === t) {
-          return d(n);
+          return h(n);
         }
         var a = e(t / 188),
           i = t % 188;
@@ -3176,7 +3143,7 @@ var c,
       this.handler = function (l, t) {
         if (t === r && 0 !== e) {
           e = 0;
-          return g(n);
+          return d(n);
         }
         if (t === r && 0 === e) {
           return o;
@@ -3186,14 +3153,14 @@ var c,
             i = null;
           e = 0;
           u(t, 65, 254) && (i = 190 * (s - 129) + (t - 65));
-          var c = null === i ? null : T(i, k("euc-kr"));
+          var g = null === i ? null : k(i, C("euc-kr"));
           null === i && a(t) && l.prepend(t);
-          return null === c ? g(n) : c;
+          return null === g ? d(n) : g;
         }
-        return a(t) ? t : u(t, 129, 254) ? (e = t, null) : g(n);
+        return a(t) ? t : u(t, 129, 254) ? (e = t, null) : d(n);
       };
     }
-    function q(l) {
+    function K(l) {
       l.fatal;
       this.handler = function (l, n) {
         if (n === r) {
@@ -3202,22 +3169,22 @@ var c,
         if (s(n)) {
           return n;
         }
-        var u = C(n, k("euc-kr"));
-        return null === u ? d(n) : [e(u / 190) + 129, u % 190 + 65];
+        var u = x(n, C("euc-kr"));
+        return null === u ? h(n) : [e(u / 190) + 129, u % 190 + 65];
       };
     }
-    function K(l, n) {
+    function X(l, n) {
       var u = l >> 8,
         e = 255 & l;
       return n ? [u, e] : [e, u];
     }
-    function X(l, n) {
+    function J(l, n) {
       var e = n.fatal,
         t = null,
         a = null;
       this.handler = function (n, s) {
         if (s === r && (null !== t || null !== a)) {
-          return g(e);
+          return d(e);
         }
         if (s === r && null === t && null === a) {
           return o;
@@ -3230,37 +3197,37 @@ var c,
         l ? i = (t << 8) + s : i = (s << 8) + t;
         t = null;
         if (null !== a) {
-          var c = a;
+          var g = a;
           a = null;
-          return u(i, 56320, 57343) ? 65536 + 1024 * (c - 55296) + (i - 56320) : (n.prepend(K(i, l)), g(e));
+          return u(i, 56320, 57343) ? 65536 + 1024 * (g - 55296) + (i - 56320) : (n.prepend(X(i, l)), d(e));
         }
-        return u(i, 55296, 56319) ? (a = i, null) : u(i, 56320, 57343) ? g(e) : i;
+        return u(i, 55296, 56319) ? (a = i, null) : u(i, 56320, 57343) ? d(e) : i;
       };
     }
-    function J(l, n) {
+    function G(l, n) {
       n.fatal;
       this.handler = function (n, e) {
         if (e === r) {
           return o;
         }
         if (u(e, 0, 65535)) {
-          return K(e, l);
+          return X(e, l);
         }
-        var t = K(55296 + (e - 65536 >> 10), l),
-          a = K(56320 + (e - 65536 & 1023), l);
+        var t = X(55296 + (e - 65536 >> 10), l),
+          a = X(56320 + (e - 65536 & 1023), l);
         return t.concat(a);
       };
     }
-    function G(l) {
+    function q(l) {
       l.fatal;
       this.handler = function (l, n) {
         return n === r ? o : a(n) ? n : 63360 + n - 128;
       };
     }
-    function H(l) {
+    function Z(l) {
       l.fatal;
       this.handler = function (l, n) {
-        return n === r ? o : s(n) ? n : u(n, 63360, 63487) ? n - 63360 + 128 : d(n);
+        return n === r ? o : s(n) ? n : u(n, 63360, 63487) ? n - 63360 + 128 : h(n);
       };
     }
     Object.defineProperty && (Object.defineProperty(v.prototype, "encoding", {
@@ -3280,7 +3247,7 @@ var c,
       var u;
       "object" == typeof l && l instanceof ArrayBuffer ? u = new Uint8Array(l) : "object" == typeof l && "buffer" in l && l.buffer instanceof ArrayBuffer ? u = new Uint8Array(l.buffer, l.byteOffset, l.byteLength) : u = new Uint8Array(0);
       n = t(n);
-      this._do_not_flush || (this._decoder = x[this._encoding.name]({
+      this._do_not_flush || (this._decoder = T[this._encoding.name]({
         fatal: "fatal" === this._error_mode
       }), this._BOMseen = !1);
       this._do_not_flush = Boolean(n.stream);
@@ -3381,15 +3348,15 @@ var c,
     w["UTF-8"] = function (l) {
       return new O(l);
     };
-    x["UTF-8"] = function (l) {
+    T["UTF-8"] = function (l) {
       return new E(l);
     };
     "encoding-indexes" in n && p.forEach(function (l) {
       if ("Legacy single-byte encodings" === l.heading) {
         l.encodings.forEach(function (l) {
           var n = l.name,
-            u = k(n.toLowerCase());
-          x[n] = function (l) {
+            u = C(n.toLowerCase());
+          T[n] = function (l) {
             return new B(u, l);
           };
           w[n] = function (l) {
@@ -3398,65 +3365,65 @@ var c,
         });
       }
     });
-    x.GBK = function (l) {
-      return new A(l);
-    };
-    w.GBK = function (l) {
-      return new L(l, !0);
-    };
-    w.gb18030 = function (l) {
+    T.GBK = function (l) {
       return new L(l);
     };
-    x.gb18030 = function (l) {
+    w.GBK = function (l) {
+      return new A(l, !0);
+    };
+    w.gb18030 = function (l) {
       return new A(l);
     };
-    w.Big5 = function (l) {
-      return new $(l);
+    T.gb18030 = function (l) {
+      return new L(l);
     };
-    x.Big5 = function (l) {
+    w.Big5 = function (l) {
+      return new _(l);
+    };
+    T.Big5 = function (l) {
       return new U(l);
     };
     w["EUC-JP"] = function (l) {
       return new D(l);
     };
-    x["EUC-JP"] = function (l) {
-      return new _(l);
+    T["EUC-JP"] = function (l) {
+      return new $(l);
     };
     w["ISO-2022-JP"] = function (l) {
-      return new P(l);
-    };
-    x["ISO-2022-JP"] = function (l) {
       return new F(l);
     };
-    w.Shift_JIS = function (l) {
+    T["ISO-2022-JP"] = function (l) {
       return new R(l);
     };
-    x.Shift_JIS = function (l) {
+    w.Shift_JIS = function (l) {
+      return new P(l);
+    };
+    T.Shift_JIS = function (l) {
       return new V(l);
     };
     w["EUC-KR"] = function (l) {
-      return new q(l);
+      return new K(l);
     };
-    x["EUC-KR"] = function (l) {
+    T["EUC-KR"] = function (l) {
       return new M(l);
     };
     w["UTF-16BE"] = function (l) {
+      return new G(!0, l);
+    };
+    T["UTF-16BE"] = function (l) {
       return new J(!0, l);
     };
-    x["UTF-16BE"] = function (l) {
-      return new X(!0, l);
-    };
     w["UTF-16LE"] = function (l) {
+      return new G(!1, l);
+    };
+    T["UTF-16LE"] = function (l) {
       return new J(!1, l);
     };
-    x["UTF-16LE"] = function (l) {
-      return new X(!1, l);
-    };
     w["x-user-defined"] = function (l) {
-      return new H(l);
+      return new Z(l);
     };
-    x["x-user-defined"] = function (l) {
-      return new G(l);
+    T["x-user-defined"] = function (l) {
+      return new q(l);
     };
     n.TextEncoder || (n.TextEncoder = I);
     n.TextDecoder || (n.TextDecoder = v);
@@ -3465,10 +3432,10 @@ var c,
       TextDecoder: n.TextDecoder,
       EncodingIndexes: n["encoding-indexes"]
     });
-  }(f || {});
+  }(c || {});
 }(d);
-var m = d.exports;
-function p(l) {
+var h = d.exports;
+function m(l) {
   let n = typeof l;
   if ("object" == n) {
     if (Array.isArray(l)) {
@@ -3481,14 +3448,14 @@ function p(l) {
   return n;
 }
 {
-  m.TextEncoder;
-  m.TextDecoder;
+  h.TextEncoder;
+  h.TextDecoder;
 }
-let b = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split(""),
-  y = [];
-for (let l = 0; l < b.length; l++) y[b[l].charCodeAt(0)] = l;
-var N, w;
-function x() {
+let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split(""),
+  b = [];
+for (let l = 0; l < p.length; l++) b[p[l].charCodeAt(0)] = l;
+var y, N;
+function w() {
   let l = 0,
     n = 0;
   for (let u = 0; u < 28; u += 7) {
@@ -3543,8 +3510,8 @@ function T(l, n, u) {
   }
 }
 {
-  y["-".charCodeAt(0)] = b.indexOf("+");
-  y["_".charCodeAt(0)] = b.indexOf("/");
+  b["-".charCodeAt(0)] = p.indexOf("+");
+  b["_".charCodeAt(0)] = p.indexOf("/");
   (function (l) {
     l.symbol = Symbol.for("protobuf-ts/unknown");
     l.onRead = (u, e, t, a, s) => {
@@ -3570,7 +3537,7 @@ function T(l, n, u) {
     };
     l.last = (n, u) => l.list(n, u).slice(-1)[0];
     const n = n => n && Array.isArray(n[l.symbol]);
-  })(N || (N = {}));
+  })(y || (y = {}));
   (function (l) {
     l[l.Varint = 0] = "Varint";
     l[l.Bit64 = 1] = "Bit64";
@@ -3578,10 +3545,10 @@ function T(l, n, u) {
     l[l.StartGroup = 3] = "StartGroup";
     l[l.EndGroup = 4] = "EndGroup";
     l[l.Bit32 = 5] = "Bit32";
-  })(w || (w = {}));
+  })(N || (N = {}));
 }
-const C = 4294967296;
-function k(l) {
+const k = 4294967296;
+function x(l) {
   let n = "-" == l[0];
   if (n) {
     l = l.slice(1);
@@ -3593,7 +3560,7 @@ function k(l) {
     const s = Number(l.slice(n, a));
     t *= u;
     e = e * u + s;
-    e >= C && (t += e / C | 0, e %= C);
+    e >= k && (t += e / k | 0, e %= k);
   }
   a(-24, -18);
   a(-18, -12);
@@ -3601,9 +3568,9 @@ function k(l) {
   a(-6);
   return [n, e, t];
 }
-function S(l, n) {
+function C(l, n) {
   if (n >>> 0 <= 2097151) {
-    return "" + (C * n + (l >>> 0));
+    return "" + (k * n + (l >>> 0));
   }
   let u = (l >>> 24 | n << 8) >>> 0 & 16777215,
     e = n >> 16 & 65535,
@@ -3619,7 +3586,7 @@ function S(l, n) {
   a >= r && (s += Math.floor(a / r), a %= r);
   return i(s, 0) + i(a, s) + i(t, 1);
 }
-function v(l, n) {
+function S(l, n) {
   if (l >= 0) {
     for (; l > 127;) {
       n.push(127 & l | 128);
@@ -3634,7 +3601,7 @@ function v(l, n) {
     n.push(1);
   }
 }
-function I() {
+function v() {
   let l = this.buf[this.pos++],
     n = 127 & l;
   if (0 == (128 & l)) {
@@ -3668,8 +3635,8 @@ function I() {
   this.assertBounds();
   return n >>> 0;
 }
-let E;
-function O(l) {
+let I;
+function E(l) {
   if (!l) {
     throw new Error("BigInt unavailable, see https://github.com/timostamm/protobuf-ts/blob/v1.0.8/MANUAL.md#bigint-support");
   }
@@ -3677,18 +3644,18 @@ function O(l) {
 !function () {
   const l = new DataView(new ArrayBuffer(8)),
     n = 0 !== globalThis.BigInt && "function" == typeof l.getBigInt64 && "function" == typeof l.getBigUint64 && "function" == typeof l.setBigInt64 && "function" == typeof l.setBigUint64;
-  n ? E = {
+  n ? I = {
     MIN: BigInt("-9223372036854775808"),
     MAX: BigInt("9223372036854775807"),
     UMIN: BigInt("0"),
     UMAX: BigInt("18446744073709551615"),
     C: BigInt,
     V: l
-  } : E = 0;
+  } : I = 0;
 }();
-const B = /^-?[0-9]+$/,
-  j = 4294967296,
-  A = 2147483648;
+const O = /^-?[0-9]+$/,
+  B = 4294967296,
+  j = 2147483648;
 class L {
   constructor(l, n) {
     this.lo = 0 | l;
@@ -3698,16 +3665,16 @@ class L {
     return 0 == this.lo && 0 == this.hi;
   }
   toNumber() {
-    let l = this.hi * j + (this.lo >>> 0);
+    let l = this.hi * B + (this.lo >>> 0);
     if (!Number.isSafeInteger(l)) {
       throw new Error("cannot convert to safe number");
     }
     return l;
   }
 }
-class U extends L {
+class A extends L {
   static from(l) {
-    if (E) {
+    if (I) {
       switch (typeof l) {
         case "string":
           {
@@ -3717,28 +3684,28 @@ class U extends L {
             if ("" == l) {
               throw new Error("string is no integer");
             }
-            l = E.C(l);
+            l = I.C(l);
           }
         case "number":
           {
             if (0 === l) {
               return this.ZERO;
             }
-            l = E.C(l);
+            l = I.C(l);
           }
         case "bigint":
           {
             if (!l) {
               return this.ZERO;
             }
-            if (l < E.UMIN) {
+            if (l < I.UMIN) {
               throw new Error("signed value for ulong");
             }
-            if (l > E.UMAX) {
+            if (l > I.UMAX) {
               throw new Error("ulong too large");
             }
-            E.V.setBigUint64(0, l, !0);
-            return new U(E.V.getInt32(0, !0), E.V.getInt32(4, !0));
+            I.V.setBigUint64(0, l, !0);
+            return new A(I.V.getInt32(0, !0), I.V.getInt32(4, !0));
           }
       }
     } else {
@@ -3748,14 +3715,14 @@ class U extends L {
             if ("0" == l) {
               return this.ZERO;
             }
-            if (l = l.trim(), !B.test(l)) {
+            if (l = l.trim(), !O.test(l)) {
               throw new Error("string is no integer");
             }
-            let [n, u, e] = k(l);
+            let [n, u, e] = x(l);
             if (n) {
               throw new Error("signed value for ulong");
             }
-            return new U(u, e);
+            return new A(u, e);
           }
         case "number":
           {
@@ -3768,26 +3735,26 @@ class U extends L {
             if (l < 0) {
               throw new Error("signed value for ulong");
             }
-            return new U(l, l / j);
+            return new A(l, l / B);
           }
       }
     }
     throw new Error("unknown value " + typeof l);
   }
   toString() {
-    return E ? this.toBigInt().toString() : S(this.lo, this.hi);
+    return I ? this.toBigInt().toString() : C(this.lo, this.hi);
   }
   toBigInt() {
-    O(E);
-    E.V.setInt32(0, this.lo, !0);
-    E.V.setInt32(4, this.hi, !0);
-    return E.V.getBigUint64(0, !0);
+    E(I);
+    I.V.setInt32(0, this.lo, !0);
+    I.V.setInt32(4, this.hi, !0);
+    return I.V.getBigUint64(0, !0);
   }
 }
-U.ZERO = new U(0, 0);
-class $ extends L {
+A.ZERO = new A(0, 0);
+class U extends L {
   static from(l) {
-    if (E) {
+    if (I) {
       switch (typeof l) {
         case "string":
           {
@@ -3797,28 +3764,28 @@ class $ extends L {
             if ("" == l) {
               throw new Error("string is no integer");
             }
-            l = E.C(l);
+            l = I.C(l);
           }
         case "number":
           {
             if (0 === l) {
               return this.ZERO;
             }
-            l = E.C(l);
+            l = I.C(l);
           }
         case "bigint":
           {
             if (!l) {
               return this.ZERO;
             }
-            if (l < E.MIN) {
+            if (l < I.MIN) {
               throw new Error("signed long too small");
             }
-            if (l > E.MAX) {
+            if (l > I.MAX) {
               throw new Error("signed long too large");
             }
-            E.V.setBigInt64(0, l, !0);
-            return new $(E.V.getInt32(0, !0), E.V.getInt32(4, !0));
+            I.V.setBigInt64(0, l, !0);
+            return new U(I.V.getInt32(0, !0), I.V.getInt32(4, !0));
           }
       }
     } else {
@@ -3828,20 +3795,20 @@ class $ extends L {
             if ("0" == l) {
               return this.ZERO;
             }
-            if (l = l.trim(), !B.test(l)) {
+            if (l = l.trim(), !O.test(l)) {
               throw new Error("string is no integer");
             }
-            let [n, u, e] = k(l);
+            let [n, u, e] = x(l);
             if (n) {
-              if (e > A || e == A && 0 != u) {
+              if (e > j || e == j && 0 != u) {
                 throw new Error("signed long too small");
               }
             } else {
-              if (e >= A) {
+              if (e >= j) {
                 throw new Error("signed long too large");
               }
             }
-            let t = new $(u, e);
+            let t = new U(u, e);
             return n ? t.negate() : t;
           }
         case "number":
@@ -3852,47 +3819,47 @@ class $ extends L {
             if (!Number.isSafeInteger(l)) {
               throw new Error("number is no integer");
             }
-            return l > 0 ? new $(l, l / j) : new $(-l, -l / j).negate();
+            return l > 0 ? new U(l, l / B) : new U(-l, -l / B).negate();
           }
       }
     }
     throw new Error("unknown value " + typeof l);
   }
   isNegative() {
-    return 0 != (this.hi & A);
+    return 0 != (this.hi & j);
   }
   negate() {
     let l = ~this.hi,
       n = this.lo;
     n ? n = 1 + ~n : l += 1;
-    return new $(n, l);
+    return new U(n, l);
   }
   toString() {
-    if (E) {
+    if (I) {
       return this.toBigInt().toString();
     }
     if (this.isNegative()) {
       let l = this.negate();
-      return "-" + S(l.lo, l.hi);
+      return "-" + C(l.lo, l.hi);
     }
-    return S(this.lo, this.hi);
+    return C(this.lo, this.hi);
   }
   toBigInt() {
-    O(E);
-    E.V.setInt32(0, this.lo, !0);
-    E.V.setInt32(4, this.hi, !0);
-    return E.V.getBigInt64(0, !0);
+    E(I);
+    I.V.setInt32(0, this.lo, !0);
+    I.V.setInt32(4, this.hi, !0);
+    return I.V.getBigInt64(0, !0);
   }
 }
-$.ZERO = new $(0, 0);
+U.ZERO = new U(0, 0);
 const _ = {
   readUnknownField: !0,
-  readerFactory: l => new D(l)
+  readerFactory: l => new $(l)
 };
-class D {
+class $ {
   constructor(l, n) {
-    this.varint64 = x;
-    this.uint32 = I;
+    this.varint64 = w;
+    this.uint32 = v;
     this.buf = l;
     this.len = l.length;
     this.pos = 0;
@@ -3914,30 +3881,30 @@ class D {
   skip(l) {
     let n = this.pos;
     switch (l) {
-      case w.Varint:
+      case N.Varint:
         {
           for (; 128 & this.buf[this.pos++];);
           break;
         }
-      case w.Bit64:
+      case N.Bit64:
         {
           this.pos += 4;
         }
-      case w.Bit32:
+      case N.Bit32:
         {
           this.pos += 4;
           break;
         }
-      case w.LengthDelimited:
+      case N.LengthDelimited:
         {
           let n = this.uint32();
           this.pos += n;
           break;
         }
-      case w.StartGroup:
+      case N.StartGroup:
         {
           let u;
-          for (; (u = this.tag()[1]) !== w.EndGroup;) this.skip(u);
+          for (; (u = this.tag()[1]) !== N.EndGroup;) this.skip(u);
           break;
         }
       default:
@@ -3961,17 +3928,17 @@ class D {
     return l >>> 1 ^ -(1 & l);
   }
   int64() {
-    return new $(...this.varint64());
+    return new U(...this.varint64());
   }
   uint64() {
-    return new U(...this.varint64());
+    return new A(...this.varint64());
   }
   sint64() {
     let [l, n] = this.varint64(),
       u = -(1 & l);
     l = (l >>> 1 | (1 & n) << 31) ^ u;
     n = n >>> 1 ^ u;
-    return new $(l, n);
+    return new U(l, n);
   }
   bool() {
     let [l, n] = this.varint64();
@@ -3984,10 +3951,10 @@ class D {
     return this.view.getInt32((this.pos += 4) - 4, !0);
   }
   fixed64() {
-    return new U(this.sfixed32(), this.sfixed32());
+    return new A(this.sfixed32(), this.sfixed32());
   }
   sfixed64() {
-    return new $(this.sfixed32(), this.sfixed32());
+    return new U(this.sfixed32(), this.sfixed32());
   }
   float() {
     return this.view.getFloat32((this.pos += 4) - 4, !0);
@@ -4006,12 +3973,12 @@ class D {
     return this.textDecoder.decode(this.bytes());
   }
 }
-function F(l, n) {
+function D(l, n) {
   if (!l) {
     throw new Error(n);
   }
 }
-function P(l) {
+function R(l) {
   if ("number" != typeof l) {
     throw new Error("invalid int 32: " + typeof l);
   }
@@ -4019,7 +3986,7 @@ function P(l) {
     throw new Error("invalid int 32: " + l);
   }
 }
-function V(l) {
+function F(l) {
   if ("number" != typeof l) {
     throw new Error("invalid uint 32: " + typeof l);
   }
@@ -4027,7 +3994,7 @@ function V(l) {
     throw new Error("invalid uint 32: " + l);
   }
 }
-function R(l) {
+function V(l) {
   if ("number" != typeof l) {
     throw new Error("invalid float 32: " + typeof l);
   }
@@ -4035,11 +4002,11 @@ function R(l) {
     throw new Error("invalid float 32: " + l);
   }
 }
-const M = {
+const P = {
   writeUnknownFields: !0,
-  writerFactory: () => new q()
+  writerFactory: () => new M()
 };
-class q {
+class M {
   constructor(l) {
     this.stack = [];
     null != l ? this.textEncoder = l : this.textEncoder = new TextEncoder();
@@ -4088,7 +4055,7 @@ class q {
     return this;
   }
   uint32(l) {
-    for (V(l); l > 127;) {
+    for (F(l); l > 127;) {
       this.buf.push(127 & l | 128);
       l >>>= 7;
     }
@@ -4096,8 +4063,8 @@ class q {
     return this;
   }
   int32(l) {
-    P(l);
-    v(l, this.buf);
+    R(l);
+    S(l, this.buf);
     return this;
   }
   bool(l) {
@@ -4114,7 +4081,7 @@ class q {
     return this.raw(n);
   }
   float(l) {
-    R(l);
+    V(l);
     let n = new Uint8Array(4);
     new DataView(n.buffer).setFloat32(0, l, !0);
     return this.raw(n);
@@ -4125,31 +4092,23 @@ class q {
     return this.raw(n);
   }
   fixed32(l) {
-    V(l);
+    F(l);
     let n = new Uint8Array(4);
     new DataView(n.buffer).setUint32(0, l, !0);
     return this.raw(n);
   }
   sfixed32(l) {
-    P(l);
+    R(l);
     let n = new Uint8Array(4);
     new DataView(n.buffer).setInt32(0, l, !0);
     return this.raw(n);
   }
   sint32(l) {
-    P(l);
-    v(l = (l << 1 ^ l >> 31) >>> 0, this.buf);
+    R(l);
+    S(l = (l << 1 ^ l >> 31) >>> 0, this.buf);
     return this;
   }
   sfixed64(l) {
-    let n = new Uint8Array(8),
-      u = new DataView(n.buffer),
-      e = $.from(l);
-    u.setInt32(0, e.lo, !0);
-    u.setInt32(4, e.hi, !0);
-    return this.raw(n);
-  }
-  fixed64(l) {
     let n = new Uint8Array(8),
       u = new DataView(n.buffer),
       e = U.from(l);
@@ -4157,19 +4116,27 @@ class q {
     u.setInt32(4, e.hi, !0);
     return this.raw(n);
   }
+  fixed64(l) {
+    let n = new Uint8Array(8),
+      u = new DataView(n.buffer),
+      e = A.from(l);
+    u.setInt32(0, e.lo, !0);
+    u.setInt32(4, e.hi, !0);
+    return this.raw(n);
+  }
   int64(l) {
-    let n = $.from(l);
+    let n = U.from(l);
     T(n.lo, n.hi, this.buf);
     return this;
   }
   sint64(l) {
-    let n = $.from(l),
+    let n = U.from(l),
       u = n.hi >> 31;
     T(n.lo << 1 ^ u, (n.hi << 1 | n.lo >>> 31) ^ u, this.buf);
     return this;
   }
   uint64(l) {
-    let n = U.from(l);
+    let n = A.from(l);
     T(n.lo, n.hi, this.buf);
     return this;
   }
@@ -4193,16 +4160,16 @@ function G(l) {
   }
   return u.join("");
 }
-var H, Z, Y;
+var q, Z, H;
 function z(l) {
   var n, u, e, t;
   null !== (n = l.localName) && 0 !== n ? l.localName = n : l.localName = G(l.name);
   null !== (u = l.jsonName) && 0 !== u ? l.jsonName = u : l.jsonName = G(l.name);
-  null !== (e = l.repeat) && 0 !== e ? l.repeat = e : l.repeat = Y.NO;
+  null !== (e = l.repeat) && 0 !== e ? l.repeat = e : l.repeat = H.NO;
   null !== (t = l.opt) && 0 !== t ? l.opt = t : l.opt = !l.repeat && !l.oneof && "message" == l.kind;
   return l;
 }
-function W(l) {
+function Y(l) {
   if ("object" != typeof l || null === l || !l.hasOwnProperty("oneofKind")) {
     return !1;
   }
@@ -4238,7 +4205,7 @@ function W(l) {
     l[l.SFIXED64 = 16] = "SFIXED64";
     l[l.SINT32 = 17] = "SINT32";
     l[l.SINT64 = 18] = "SINT64";
-  }(H || (H = {}));
+  }(q || (q = {}));
   (function (l) {
     l[l.BIGINT = 0] = "BIGINT";
     l[l.STRING = 1] = "STRING";
@@ -4248,9 +4215,9 @@ function W(l) {
     l[l.NO = 0] = "NO";
     l[l.PACKED = 1] = "PACKED";
     l[l.UNPACKED = 2] = "UNPACKED";
-  })(Y || (Y = {}));
+  })(H || (H = {}));
 }
-class Q {
+class W {
   constructor(l) {
     var n;
     null !== (n = l.fields) && 0 !== n ? this.fields = n : this.fields = [];
@@ -4313,7 +4280,7 @@ class Q {
     }
     for (const e of t.oneofs) {
       const t = l[e];
-      if (!W(t)) {
+      if (!Y(t)) {
         return !1;
       }
       if (0 === t.oneofKind) {
@@ -4341,7 +4308,7 @@ class Q {
         }
       case "enum":
         {
-          return 0 === l ? n.opt : t ? this.scalars(l, H.INT32, e) : this.scalar(l, H.INT32);
+          return 0 === l ? n.opt : t ? this.scalars(l, q.INT32, e) : this.scalar(l, q.INT32);
         }
       case "message":
         {
@@ -4365,7 +4332,7 @@ class Q {
               }
             case "enum":
               {
-                return this.scalars(Object.values(l), H.INT32, e);
+                return this.scalars(Object.values(l), q.INT32, e);
               }
             case "message":
               {
@@ -4400,15 +4367,15 @@ class Q {
   scalar(l, n, u) {
     let e = typeof l;
     switch (n) {
-      case H.UINT64:
+      case q.UINT64:
         {}
-      case H.FIXED64:
+      case q.FIXED64:
         {}
-      case H.INT64:
+      case q.INT64:
         {}
-      case H.SFIXED64:
+      case q.SFIXED64:
         {}
-      case H.SINT64:
+      case q.SINT64:
         {
           switch (u) {
             case Z.BIGINT:
@@ -4425,21 +4392,21 @@ class Q {
               }
           }
         }
-      case H.BOOL:
+      case q.BOOL:
         {
           return "boolean" == e;
         }
-      case H.STRING:
+      case q.STRING:
         {
           return "string" == e;
         }
-      case H.BYTES:
+      case q.BYTES:
         {
           return l instanceof Uint8Array;
         }
-      case H.DOUBLE:
+      case q.DOUBLE:
         {}
-      case H.FLOAT:
+      case q.FLOAT:
         {
           return "number" == e && !isNaN(l);
         }
@@ -4466,19 +4433,19 @@ class Q {
   mapKeys(l, n, u) {
     let e = Object.keys(l);
     switch (n) {
-      case H.INT32:
+      case q.INT32:
         {}
-      case H.FIXED32:
+      case q.FIXED32:
         {}
-      case H.SFIXED32:
+      case q.SFIXED32:
         {}
-      case H.SINT32:
+      case q.SINT32:
         {}
-      case H.UINT32:
+      case q.UINT32:
         {
           return this.scalars(e.slice(0, u).map(l => parseInt(l)), n, u);
         }
-      case H.BOOL:
+      case q.BOOL:
         {
           return this.scalars(e.slice(0, u).map(l => "true" == l || "false" != l && l), n, u);
         }
@@ -4489,7 +4456,7 @@ class Q {
     }
   }
 }
-function ll(l, n) {
+function Q(l, n) {
   switch (n) {
     case Z.BIGINT:
       {
@@ -4505,7 +4472,7 @@ function ll(l, n) {
       }
   }
 }
-class nl {
+class ll {
   constructor(l) {
     this.info = l;
   }
@@ -4523,7 +4490,7 @@ class nl {
   }
   assert(l, n, u) {
     if (!l) {
-      let l = p(u);
+      let l = m(u);
       throw "number" != l && "boolean" != l || (l = u.toString()), new Error(`Cannot parse JSON ${l} for ${this.info.typeName}#${n}`);
     }
   }
@@ -4582,7 +4549,7 @@ class nl {
           }
           this.assert(0 !== a, l.name + " map value", t);
           let s = e;
-          l.K == H.BOOL && (s = "true" == s || "false" != s && s);
+          l.K == q.BOOL && (s = "true" == s || "false" != s && s);
           s = this.scalar(s, l.K, Z.STRING, l.name).toString();
           n[s] = a;
         }
@@ -4647,14 +4614,14 @@ class nl {
     var t;
   }
   enum(l, n, u, e) {
-    "google.protobuf.NullValue" == l[0] && F(null === n || "NULL_VALUE" === n, `Unable to parse field ${this.info.typeName}#${u}, enum ${l[0]} only accepts null.`);
+    "google.protobuf.NullValue" == l[0] && D(null === n || "NULL_VALUE" === n, `Unable to parse field ${this.info.typeName}#${u}, enum ${l[0]} only accepts null.`);
     if (null === n) {
       return 0;
     }
     switch (typeof n) {
       case "number":
         {
-          F(Number.isInteger(n), `Unable to parse field ${this.info.typeName}#${u}, enum can only be integral number, got ${n}.`);
+          D(Number.isInteger(n), `Unable to parse field ${this.info.typeName}#${u}, enum can only be integral number, got ${n}.`);
           return n;
         }
       case "string":
@@ -4664,18 +4631,18 @@ class nl {
             t = n.substring(l[2].length);
           }
           let a = l[1][t];
-          return (0 !== a || !e) && (F("number" == typeof a, `Unable to parse field ${this.info.typeName}#${u}, enum ${l[0]} has no value for "${n}".`), a);
+          return (0 !== a || !e) && (D("number" == typeof a, `Unable to parse field ${this.info.typeName}#${u}, enum ${l[0]} has no value for "${n}".`), a);
         }
     }
-    F(!1, `Unable to parse field ${this.info.typeName}#${u}, cannot parse enum value from ${typeof n}".`);
+    D(!1, `Unable to parse field ${this.info.typeName}#${u}, cannot parse enum value from ${typeof n}".`);
   }
   scalar(l, n, u, e) {
     let t;
     try {
       switch (n) {
-        case H.DOUBLE:
+        case q.DOUBLE:
           {}
-        case H.FLOAT:
+        case q.FLOAT:
           {
             if (null === l) {
               return 0;
@@ -4709,18 +4676,18 @@ class nl {
               t = "too large or small";
               break;
             }
-            n == H.FLOAT && R(e);
+            n == q.FLOAT && V(e);
             return e;
           }
-        case H.INT32:
+        case q.INT32:
           {}
-        case H.FIXED32:
+        case q.FIXED32:
           {}
-        case H.SFIXED32:
+        case q.SFIXED32:
           {}
-        case H.SINT32:
+        case q.SINT32:
           {}
-        case H.UINT32:
+        case q.UINT32:
           {
             if (null === l) {
               return 0;
@@ -4729,36 +4696,36 @@ class nl {
             if ("number" == typeof l ? a = l : "" === l ? t = "empty string" : "string" == typeof l && (l.trim().length !== l.length ? t = "extra whitespace" : a = Number(l)), 0 === a) {
               break;
             }
-            n == H.UINT32 ? V(a) : P(a);
+            n == q.UINT32 ? F(a) : R(a);
             return a;
           }
-        case H.INT64:
+        case q.INT64:
           {}
-        case H.SFIXED64:
+        case q.SFIXED64:
           {}
-        case H.SINT64:
+        case q.SINT64:
           {
             if (null === l) {
-              return ll($.ZERO, u);
+              return Q(U.ZERO, u);
             }
             if ("number" != typeof l && "string" != typeof l) {
               break;
             }
-            return ll($.from(l), u);
+            return Q(U.from(l), u);
           }
-        case H.FIXED64:
+        case q.FIXED64:
           {}
-        case H.UINT64:
+        case q.UINT64:
           {
             if (null === l) {
-              return ll(U.ZERO, u);
+              return Q(A.ZERO, u);
             }
             if ("number" != typeof l && "string" != typeof l) {
               break;
             }
-            return ll(U.from(l), u);
+            return Q(A.from(l), u);
           }
-        case H.BOOL:
+        case q.BOOL:
           {
             if (null === l) {
               return !1;
@@ -4768,7 +4735,7 @@ class nl {
             }
             return l;
           }
-        case H.STRING:
+        case q.STRING:
           {
             if (null === l) {
               return "";
@@ -4785,7 +4752,7 @@ class nl {
             }
             return l;
           }
-        case H.BYTES:
+        case q.BYTES:
           {
             if (null === l || "" === l) {
               return new Uint8Array(0);
@@ -4802,7 +4769,7 @@ class nl {
                 a = 0,
                 s = 0;
               for (let n = 0; n < l.length; n++) {
-                u = y[l.charCodeAt(n)];
+                u = b[l.charCodeAt(n)];
                 if (0 === u) {
                   switch (l[n]) {
                     case "=":
@@ -4866,7 +4833,7 @@ class nl {
     this.assert(!1, e + (t ? " - " + t : ""), l);
   }
 }
-class ul {
+class nl {
   constructor(l) {
     var n;
     null !== (n = l.fields) && 0 !== n ? this.fields = n : this.fields = [];
@@ -4890,7 +4857,7 @@ class ul {
         emitDefaultValues: !0
       }) : n;
       let s = this.field(l, t[l.localName], a);
-      F(0 !== s);
+      D(0 !== s);
       u[n.useProtoFieldName ? l.name : l.jsonName] = s;
     }
     return u;
@@ -4898,14 +4865,14 @@ class ul {
   field(l, n, u) {
     let e;
     if ("map" == l.kind) {
-      F("object" == typeof n && null !== n);
+      D("object" == typeof n && null !== n);
       const t = {};
       switch (l.V.kind) {
         case "scalar":
           {
             for (const [u, e] of Object.entries(n)) {
               const n = this.scalar(l.V.T, e, l.name, !1, !0);
-              F(0 !== n);
+              D(0 !== n);
               t[u.toString()] = n;
             }
             break;
@@ -4915,7 +4882,7 @@ class ul {
             const e = l.V.T();
             for (const [a, s] of Object.entries(n)) {
               const n = this.message(e, s, l.name, u);
-              F(0 !== n);
+              D(0 !== n);
               t[a.toString()] = n;
             }
             break;
@@ -4924,9 +4891,9 @@ class ul {
           {
             const a = l.V.T();
             for (const [e, s] of Object.entries(n)) {
-              F(0 === s || "number" == typeof s);
+              D(0 === s || "number" == typeof s);
               const n = this.enum(a, s, l.name, !1, !0, u.enumAsInteger);
-              F(0 !== n);
+              D(0 !== n);
               t[e.toString()] = n;
             }
           }
@@ -4936,14 +4903,14 @@ class ul {
       }
     } else {
       if (l.repeat) {
-        F(Array.isArray(n));
+        D(Array.isArray(n));
         const t = [];
         switch (l.kind) {
           case "scalar":
             {
               for (let u = 0; u < n.length; u++) {
                 const e = this.scalar(l.T, n[u], l.name, l.opt, !0);
-                F(0 !== e);
+                D(0 !== e);
                 t.push(e);
               }
               break;
@@ -4952,9 +4919,9 @@ class ul {
             {
               const e = l.T();
               for (let a = 0; a < n.length; a++) {
-                F(0 === n[a] || "number" == typeof n[a]);
+                D(0 === n[a] || "number" == typeof n[a]);
                 const s = this.enum(e, n[a], l.name, l.opt, !0, u.enumAsInteger);
-                F(0 !== s);
+                D(0 !== s);
                 t.push(s);
               }
               break;
@@ -4964,7 +4931,7 @@ class ul {
               const a = l.T();
               for (let e = 0; e < n.length; e++) {
                 const s = this.message(a, n[e], l.name, u);
-                F(0 !== s);
+                D(0 !== s);
                 t.push(s);
               }
             }
@@ -4999,12 +4966,12 @@ class ul {
     }
     if (0 !== n) {
       if (0 !== n || t || e) {
-        F("number" == typeof n);
-        F(Number.isInteger(n));
+        D("number" == typeof n);
+        D(Number.isInteger(n));
         return a || !l[1].hasOwnProperty(n) ? n : l[2] ? l[2] + l[1][n] : l[1][n];
       }
     } else {
-      F(e);
+      D(e);
     }
   }
   message(l, n, u, e) {
@@ -5012,67 +4979,67 @@ class ul {
   }
   scalar(l, n, u, e, t) {
     if (0 === n) {
-      return F(e);
+      return D(e);
     }
     const a = t || e;
     switch (l) {
-      case H.INT32:
+      case q.INT32:
         {}
-      case H.SFIXED32:
+      case q.SFIXED32:
         {}
-      case H.SINT32:
+      case q.SINT32:
         {
-          return 0 === n ? a ? 0 : 0 : (P(n), n);
+          return 0 === n ? a ? 0 : 0 : (R(n), n);
         }
-      case H.FIXED32:
+      case q.FIXED32:
         {}
-      case H.UINT32:
+      case q.UINT32:
         {
-          return 0 === n ? a ? 0 : 0 : (V(n), n);
+          return 0 === n ? a ? 0 : 0 : (F(n), n);
         }
-      case H.FLOAT:
+      case q.FLOAT:
         {
-          R(n);
+          V(n);
         }
-      case H.DOUBLE:
+      case q.DOUBLE:
         {
-          return 0 === n ? a ? 0 : 0 : (F("number" == typeof n), Number.isNaN(n) ? "NaN" : n === Number.POSITIVE_INFINITY ? "Infinity" : n === Number.NEGATIVE_INFINITY ? "-Infinity" : n);
+          return 0 === n ? a ? 0 : 0 : (D("number" == typeof n), Number.isNaN(n) ? "NaN" : n === Number.POSITIVE_INFINITY ? "Infinity" : n === Number.NEGATIVE_INFINITY ? "-Infinity" : n);
         }
-      case H.STRING:
+      case q.STRING:
         {
-          return "" === n ? a ? "" : 0 : (F("string" == typeof n), n);
+          return "" === n ? a ? "" : 0 : (D("string" == typeof n), n);
         }
-      case H.BOOL:
+      case q.BOOL:
         {
-          return !1 === n ? !a && 0 : (F("boolean" == typeof n), n);
+          return !1 === n ? !a && 0 : (D("boolean" == typeof n), n);
         }
-      case H.UINT64:
+      case q.UINT64:
         {}
-      case H.FIXED64:
+      case q.FIXED64:
         {
-          F("number" == typeof n || "string" == typeof n || "bigint" == typeof n);
-          let l = U.from(n);
+          D("number" == typeof n || "string" == typeof n || "bigint" == typeof n);
+          let l = A.from(n);
           if (l.isZero() && !a) {
             return;
           }
           return l.toString();
         }
-      case H.INT64:
+      case q.INT64:
         {}
-      case H.SFIXED64:
+      case q.SFIXED64:
         {}
-      case H.SINT64:
+      case q.SINT64:
         {
-          F("number" == typeof n || "string" == typeof n || "bigint" == typeof n);
-          let u = $.from(n);
+          D("number" == typeof n || "string" == typeof n || "bigint" == typeof n);
+          let u = U.from(n);
           if (u.isZero() && !a) {
             return;
           }
           return u.toString();
         }
-      case H.BYTES:
+      case q.BYTES:
         {
-          F(n instanceof Uint8Array);
+          D(n instanceof Uint8Array);
           return n.byteLength ? function (l) {
             let n,
               u = "",
@@ -5081,63 +5048,63 @@ class ul {
             for (let a = 0; a < l.length; a++) switch (n = l[a], e) {
               case 0:
                 {
-                  u += b[n >> 2];
+                  u += p[n >> 2];
                   t = (3 & n) << 4;
                   e = 1;
                   break;
                 }
               case 1:
                 {
-                  u += b[t | n >> 4];
+                  u += p[t | n >> 4];
                   t = (15 & n) << 2;
                   e = 2;
                   break;
                 }
               case 2:
                 {
-                  u += b[t | n >> 6];
-                  u += b[63 & n];
+                  u += p[t | n >> 6];
+                  u += p[63 & n];
                   e = 0;
                 }
             }
-            e && (u += b[t], u += "=", 1 == e && (u += "="));
+            e && (u += p[t], u += "=", 1 == e && (u += "="));
             return u;
           }(n) : a ? "" : 0;
         }
     }
   }
 }
-function el(l, n = Z.STRING) {
+function ul(l, n = Z.STRING) {
   switch (l) {
-    case H.BOOL:
+    case q.BOOL:
       {
         return !1;
       }
-    case H.UINT64:
+    case q.UINT64:
       {}
-    case H.FIXED64:
+    case q.FIXED64:
       {
-        return ll(U.ZERO, n);
+        return Q(A.ZERO, n);
       }
-    case H.INT64:
+    case q.INT64:
       {}
-    case H.SFIXED64:
+    case q.SFIXED64:
       {}
-    case H.SINT64:
+    case q.SINT64:
       {
-        return ll($.ZERO, n);
+        return Q(U.ZERO, n);
       }
-    case H.DOUBLE:
+    case q.DOUBLE:
       {}
-    case H.FLOAT:
+    case q.FLOAT:
       {
         return 0;
       }
-    case H.BYTES:
+    case q.BYTES:
       {
         return new Uint8Array(0);
       }
-    case H.STRING:
+    case q.STRING:
       {
         return "";
       }
@@ -5147,7 +5114,7 @@ function el(l, n = Z.STRING) {
       }
   }
 }
-class tl {
+class el {
   constructor(l) {
     this.info = l;
   }
@@ -5171,7 +5138,7 @@ class tl {
         }
         let s = l.skip(t);
         if (!1 !== a) {
-          (!0 === a ? N.onRead : a)(this.info.typeName, n, e, t, s);
+          (!0 === a ? y.onRead : a)(this.info.typeName, n, e, t, s);
         }
         continue;
       }
@@ -5185,11 +5152,11 @@ class tl {
           {}
         case "enum":
           {
-            let n = "enum" == a.kind ? H.INT32 : a.T,
+            let n = "enum" == a.kind ? q.INT32 : a.T,
               e = "scalar" == a.kind ? a.L : 0;
             if (r) {
               let u = s[i];
-              if (t == w.LengthDelimited && n != H.STRING && n != H.BYTES) {
+              if (t == N.LengthDelimited && n != q.STRING && n != q.BYTES) {
                 let t = l.uint32() + l.pos;
                 for (; l.pos < t;) u.push(this.scalar(l, n, e));
               } else {
@@ -5229,7 +5196,7 @@ class tl {
       switch (a) {
         case 1:
           {
-            l.K == H.BOOL ? e = n.bool().toString() : e = this.scalar(n, l.K, Z.STRING);
+            l.K == q.BOOL ? e = n.bool().toString() : e = this.scalar(n, l.K, Z.STRING);
             break;
           }
         case 2:
@@ -5259,14 +5226,14 @@ class tl {
       }
     }
     if (0 === e) {
-      let n = el(l.K);
-      l.K == H.BOOL ? e = n.toString() : e = n;
+      let n = ul(l.K);
+      l.K == q.BOOL ? e = n.toString() : e = n;
     }
     if (0 === t) {
       switch (l.V.kind) {
         case "scalar":
           {
-            t = el(l.V.T, l.V.L);
+            t = ul(l.V.T, l.V.L);
             break;
           }
         case "enum":
@@ -5284,70 +5251,70 @@ class tl {
   }
   scalar(l, n, u) {
     switch (n) {
-      case H.INT32:
+      case q.INT32:
         {
           return l.int32();
         }
-      case H.STRING:
+      case q.STRING:
         {
           return l.string();
         }
-      case H.BOOL:
+      case q.BOOL:
         {
           return l.bool();
         }
-      case H.DOUBLE:
+      case q.DOUBLE:
         {
           return l.double();
         }
-      case H.FLOAT:
+      case q.FLOAT:
         {
           return l.float();
         }
-      case H.INT64:
+      case q.INT64:
         {
-          return ll(l.int64(), u);
+          return Q(l.int64(), u);
         }
-      case H.UINT64:
+      case q.UINT64:
         {
-          return ll(l.uint64(), u);
+          return Q(l.uint64(), u);
         }
-      case H.FIXED64:
+      case q.FIXED64:
         {
-          return ll(l.fixed64(), u);
+          return Q(l.fixed64(), u);
         }
-      case H.FIXED32:
+      case q.FIXED32:
         {
           return l.fixed32();
         }
-      case H.BYTES:
+      case q.BYTES:
         {
           return l.bytes();
         }
-      case H.UINT32:
+      case q.UINT32:
         {
           return l.uint32();
         }
-      case H.SFIXED32:
+      case q.SFIXED32:
         {
           return l.sfixed32();
         }
-      case H.SFIXED64:
+      case q.SFIXED64:
         {
-          return ll(l.sfixed64(), u);
+          return Q(l.sfixed64(), u);
         }
-      case H.SINT32:
+      case q.SINT32:
         {
           return l.sint32();
         }
-      case H.SINT64:
+      case q.SINT64:
         {
-          return ll(l.sint64(), u);
+          return Q(l.sint64(), u);
         }
     }
   }
 }
-class al {
+class tl {
   constructor(l) {
     this.info = l;
   }
@@ -5380,23 +5347,23 @@ class al {
           {}
         case "enum":
           {
-            let l = "enum" == e.kind ? H.INT32 : e.T;
+            let l = "enum" == e.kind ? q.INT32 : e.T;
             if (s) {
-              F(Array.isArray(t));
-              if (s == Y.PACKED) {
+              D(Array.isArray(t));
+              if (s == H.PACKED) {
                 this.packed(n, l, e.no, t);
               } else {
                 for (const u of t) this.scalar(n, l, e.no, u, !0);
               }
             } else {
-              0 === t ? F(e.opt) : this.scalar(n, l, e.no, t, a || e.opt);
+              0 === t ? D(e.opt) : this.scalar(n, l, e.no, t, a || e.opt);
             }
             break;
           }
         case "message":
           {
             if (s) {
-              F(Array.isArray(t));
+              D(Array.isArray(t));
               for (const l of t) this.message(n, u, e.T(), e.no, l);
             } else {
               this.message(n, u, e.T(), e.no, t);
@@ -5405,37 +5372,37 @@ class al {
           }
         case "map":
           {
-            F("object" == typeof t && null !== t);
+            D("object" == typeof t && null !== t);
             for (const [l, a] of Object.entries(t)) this.mapEntry(n, u, e, l, a);
           }
       }
     }
     let e = u.writeUnknownFields;
     if (!1 !== e) {
-      (!0 === e ? N.onWrite : e)(this.info.typeName, l, n);
+      (!0 === e ? y.onWrite : e)(this.info.typeName, l, n);
     }
   }
   mapEntry(l, n, u, e, t) {
-    l.tag(u.no, w.LengthDelimited);
+    l.tag(u.no, N.LengthDelimited);
     l.fork();
     let a = e;
     switch (u.K) {
-      case H.INT32:
+      case q.INT32:
         {}
-      case H.FIXED32:
+      case q.FIXED32:
         {}
-      case H.UINT32:
+      case q.UINT32:
         {}
-      case H.SFIXED32:
+      case q.SFIXED32:
         {}
-      case H.SINT32:
+      case q.SINT32:
         {
           a = Number.parseInt(e);
           break;
         }
-      case H.BOOL:
+      case q.BOOL:
         {
-          F("true" == e || "false" == e);
+          D("true" == e || "false" == e);
           a = "true" == e;
         }
     }
@@ -5447,7 +5414,7 @@ class al {
         }
       case "enum":
         {
-          this.scalar(l, H.INT32, 2, t, !0);
+          this.scalar(l, q.INT32, 2, t, !0);
           break;
         }
       case "message":
@@ -5459,7 +5426,7 @@ class al {
   }
   message(l, n, u, e, t) {
     if (0 !== t) {
-      u.internalBinaryWrite(t, l.tag(e, w.LengthDelimited).fork(), n);
+      u.internalBinaryWrite(t, l.tag(e, N.LengthDelimited).fork(), n);
       l.join();
     }
   }
@@ -5471,8 +5438,8 @@ class al {
     if (!e.length) {
       return;
     }
-    F(n !== H.BYTES && n !== H.STRING);
-    l.tag(u, w.LengthDelimited);
+    D(n !== q.BYTES && n !== q.STRING);
+    l.tag(u, N.LengthDelimited);
     l.fork();
     let [, t] = this.scalarInfo(n);
     for (let n = 0; n < e.length; n++) l[t](e[n]);
@@ -5480,105 +5447,105 @@ class al {
   }
   scalarInfo(l, n) {
     let u,
-      e = w.Varint,
+      e = N.Varint,
       t = 0 === n,
       a = 0 === n;
     switch (l) {
-      case H.INT32:
+      case q.INT32:
         {
           u = "int32";
           break;
         }
-      case H.STRING:
+      case q.STRING:
         {
           a = t || !n.length;
-          e = w.LengthDelimited;
+          e = N.LengthDelimited;
           u = "string";
           break;
         }
-      case H.BOOL:
+      case q.BOOL:
         {
           a = !1 === n;
           u = "bool";
           break;
         }
-      case H.UINT32:
+      case q.UINT32:
         {
           u = "uint32";
           break;
         }
-      case H.DOUBLE:
+      case q.DOUBLE:
         {
-          e = w.Bit64;
+          e = N.Bit64;
           u = "double";
           break;
         }
-      case H.FLOAT:
+      case q.FLOAT:
         {
-          e = w.Bit32;
+          e = N.Bit32;
           u = "float";
           break;
         }
-      case H.INT64:
+      case q.INT64:
         {
-          a = t || $.from(n).isZero();
+          a = t || U.from(n).isZero();
           u = "int64";
           break;
         }
-      case H.UINT64:
+      case q.UINT64:
         {
-          a = t || U.from(n).isZero();
+          a = t || A.from(n).isZero();
           u = "uint64";
           break;
         }
-      case H.FIXED64:
+      case q.FIXED64:
         {
-          a = t || U.from(n).isZero();
-          e = w.Bit64;
+          a = t || A.from(n).isZero();
+          e = N.Bit64;
           u = "fixed64";
           break;
         }
-      case H.BYTES:
+      case q.BYTES:
         {
           a = t || !n.byteLength;
-          e = w.LengthDelimited;
+          e = N.LengthDelimited;
           u = "bytes";
           break;
         }
-      case H.FIXED32:
+      case q.FIXED32:
         {
-          e = w.Bit32;
+          e = N.Bit32;
           u = "fixed32";
           break;
         }
-      case H.SFIXED32:
+      case q.SFIXED32:
         {
-          e = w.Bit32;
+          e = N.Bit32;
           u = "sfixed32";
           break;
         }
-      case H.SFIXED64:
+      case q.SFIXED64:
         {
-          a = t || $.from(n).isZero();
-          e = w.Bit64;
+          a = t || U.from(n).isZero();
+          e = N.Bit64;
           u = "sfixed64";
           break;
         }
-      case H.SINT32:
+      case q.SINT32:
         {
           u = "sint32";
           break;
         }
-      case H.SINT64:
+      case q.SINT64:
         {
-          a = t || $.from(n).isZero();
+          a = t || U.from(n).isZero();
           u = "sint64";
         }
     }
     return [e, u, t || a];
   }
 }
-function sl(l, n, u) {
+function al(l, n, u) {
   let e,
     t,
     a = u;
@@ -5645,12 +5612,12 @@ function sl(l, n, u) {
     }
   }
 }
-const rl = Object.values;
-function il(l, n, u) {
+const sl = Object.values;
+function rl(l, n, u) {
   if (n === u) {
     return !0;
   }
-  if (l !== H.BYTES) {
+  if (l !== q.BYTES) {
     return !1;
   }
   let e = n,
@@ -5663,16 +5630,16 @@ function il(l, n, u) {
   }
   return !0;
 }
-function ol(l, n, u) {
+function il(l, n, u) {
   if (n.length !== u.length) {
     return !1;
   }
-  for (let e = 0; e < n.length; e++) if (!il(l, n[e], u[e])) {
+  for (let e = 0; e < n.length; e++) if (!rl(l, n[e], u[e])) {
     return !1;
   }
   return !0;
 }
-function gl(l, n, u) {
+function ol(l, n, u) {
   if (n.length !== u.length) {
     return !1;
   }
@@ -5681,7 +5648,7 @@ function gl(l, n, u) {
   }
   return !0;
 }
-class cl {
+class gl {
   constructor(l, n, u) {
     this.defaultCheckDepth = 16;
     this.typeName = l;
@@ -5690,11 +5657,11 @@ class cl {
     this.messagePrototype = Object.defineProperty({}, J, {
       value: this
     });
-    this.refTypeCheck = new Q(this);
-    this.refJsonReader = new nl(this);
-    this.refJsonWriter = new ul(this);
-    this.refBinReader = new tl(this);
-    this.refBinWriter = new al(this);
+    this.refTypeCheck = new W(this);
+    this.refJsonReader = new ll(this);
+    this.refJsonWriter = new nl(this);
+    this.refBinReader = new el(this);
+    this.refBinWriter = new tl(this);
   }
   create(l) {
     let n = function (l) {
@@ -5715,7 +5682,7 @@ class cl {
               switch (u.kind) {
                 case "scalar":
                   {
-                    n[l] = el(u.T, u.L);
+                    n[l] = ul(u.T, u.L);
                     break;
                   }
                 case "enum":
@@ -5734,12 +5701,12 @@ class cl {
       }
       return n;
     }(this);
-    0 !== l && sl(this, n, l);
+    0 !== l && al(this, n, l);
     return n;
   }
   clone(l) {
     let n = this.create();
-    sl(this, n, l);
+    al(this, n, l);
     return n;
   }
   equals(l, n) {
@@ -5759,15 +5726,15 @@ class cl {
             {}
           case "scalar":
             {
-              let l = "enum" == e.kind ? H.INT32 : e.T;
-              if (!(e.repeat ? ol(l, t, a) : il(l, t, a))) {
+              let l = "enum" == e.kind ? q.INT32 : e.T;
+              if (!(e.repeat ? il(l, t, a) : rl(l, t, a))) {
                 return !1;
               }
               break;
             }
           case "map":
             {
-              if (!("message" == e.V.kind ? gl(e.V.T(), rl(t), rl(a)) : ol("enum" == e.V.kind ? H.INT32 : e.V.T, rl(t), rl(a)))) {
+              if (!("message" == e.V.kind ? ol(e.V.T(), sl(t), sl(a)) : il("enum" == e.V.kind ? q.INT32 : e.V.T, sl(t), sl(a)))) {
                 return !1;
               }
               break;
@@ -5775,7 +5742,7 @@ class cl {
           case "message":
             {
               let n = e.T();
-              if (!(e.repeat ? gl(n, t, a) : n.equals(t, a))) {
+              if (!(e.repeat ? ol(n, t, a) : n.equals(t, a))) {
                 return !1;
               }
             }
@@ -5791,7 +5758,7 @@ class cl {
     return this.refTypeCheck.is(l, n, !0);
   }
   mergePartial(l, n) {
-    sl(this, l, n);
+    al(this, l, n);
   }
   fromBinary(l, n) {
     let u = function (l) {
@@ -5820,7 +5787,7 @@ class cl {
   }
   toBinary(l, n) {
     let u = function (l) {
-      return l ? Object.assign(Object.assign({}, M), l) : M;
+      return l ? Object.assign(Object.assign({}, P), l) : P;
     }(n);
     return this.internalBinaryWrite(l, u.writerFactory(), u).finish();
   }
@@ -5830,7 +5797,7 @@ class cl {
       this.refJsonReader.read(l, e, n);
       return e;
     }
-    throw new Error(`Unable to parse message ${this.typeName} from JSON ${p(l)}.`);
+    throw new Error(`Unable to parse message ${this.typeName} from JSON ${m(l)}.`);
   }
   internalJsonWrite(l, n) {
     return this.refJsonWriter.write(l, n);
@@ -5845,25 +5812,56 @@ class cl {
     return t;
   }
 }
-const fl = new u("🍿 DualSubs: ▶ YouTube v1.3.4(4) request");
-let dl;
-const hl = e.parse($request.url);
-fl.log(`⚠ ${fl.name}`, `URL: ${JSON.stringify(hl)}`, "");
-const ml = $request.method,
-  pl = hl.host,
-  bl = hl.path;
+const cl = new u("🍿 DualSubs: ▶ YouTube v1.0.2(2) response"),
+  dl = class {
+    static name = "URI";
+    static version = "1.2.7";
+    static about() {
+      return console.log(`\n🟧 ${this.name} v${this.version}\n`);
+    }
+    static #t = {
+      scheme: "",
+      host: "",
+      path: "",
+      query: {}
+    };
+    static parse(l) {
+      let n = l.match(/(?:(?<scheme>.+):\/\/(?<host>[^/]+))?\/?(?<path>[^?]+)?\??(?<query>[^?]+)?/)?.groups ?? null;
+      n?.path ? n.paths = n.path.split("/") : n.path = "";
+      if (n?.paths) {
+        const l = n.paths[n.paths.length - 1];
+        if (l?.includes(".")) {
+          const u = l.split(".");
+          n.format = u[u.length - 1];
+        }
+      }
+      n?.query && (n.query = Object.fromEntries(n.query.split("&").map(l => l.split("="))));
+      return n;
+    }
+    static stringify(l = this.#t) {
+      let n = "";
+      l?.scheme && l?.host && (n += l.scheme + "://" + l.host);
+      l?.path && (l?.host ? n += "/" + l.path : n += l.path);
+      l?.query && (n += "?" + Object.entries(l.query).map(l => l.join("=")).join("&"));
+      return n;
+    }
+  }.parse($request.url);
+cl.log(`⚠ ${cl.name}`, `URL: ${JSON.stringify(dl)}`, "");
+const fl = $request.method,
+  hl = dl.host,
+  ml = dl.path;
 {
-  hl.paths;
-  fl.log(`⚠ ${fl.name}`, `METHOD: ${ml}`, "");
+  dl.paths;
+  cl.log(`⚠ ${cl.name}`, `METHOD: ${fl}`, "");
 }
-const yl = ($request.headers?.["Content-Type"] ?? $request.headers?.["content-type"])?.split(";")?.[0];
+const pl = ($response.headers?.["Content-Type"] ?? $response.headers?.["content-type"])?.split(";")?.[0];
 {
-  fl.log(`⚠ ${fl.name}, FORMAT: ${yl}`, "");
+  cl.log(`⚠ ${cl.name}, FORMAT: ${pl}`, "");
   (async () => {
     const {
-      Settings: u,
-      Caches: t,
-      Configs: a
+      Settings: l,
+      Caches: n,
+      Configs: u
     } = function (l, n, u, e) {
       console.log("☑️ Set Environment Variables", "");
       let {
@@ -5901,7 +5899,7 @@ const yl = ($request.headers?.["Content-Type"] ?? $request.headers?.["content-ty
               t.Position = "Forward";
               break;
             }
-          case "译文位于原文之下":
+          case "译文位于外文之下":
             {
               t.Position = "Reverse";
             }
@@ -5919,362 +5917,334 @@ const yl = ($request.headers?.["Content-Type"] ?? $request.headers?.["content-ty
         Caches: a,
         Configs: s
       };
-    }(fl, "DualSubs", "YouTube", g);
-    switch (fl.log(`⚠ ${fl.name}`, `Settings.Switch: ${u?.Switch}`, ""), u.Switch) {
+    }(cl, "DualSubs", "YouTube", o);
+    switch (cl.log(`⚠ ${cl.name}`, `Settings.Switch: ${l?.Switch}`, ""), l.Switch) {
       case !0:
         {}
       default:
         {
-          const a = hl.query?.subtype ?? u.Type,
-            s = [hl.query?.lang?.toUpperCase?.() ?? u.Languages[0], (hl.query?.tlang ?? t?.tlang)?.toUpperCase?.() ?? u.Languages[1]];
-          fl.log(`⚠ ${fl.name}, Type: ${a}, Languages: ${s}`, "");
-          let r = {};
-          switch (ml) {
-            case "POST":
+          const e = dl.query?.subtype ?? l.Type,
+            t = [dl.query?.lang?.toUpperCase?.() ?? l.Languages[0], (dl.query?.tlang ?? n?.tlang)?.toUpperCase?.() ?? l.Languages[1]];
+          cl.log(`⚠ ${cl.name}, Type: ${e}, Languages: ${t}`, "");
+          let a = {
+            captions: {
+              playerCaptionsTracklistRenderer: {
+                captionTracks: [],
+                audioTracks: [],
+                translationLanguages: []
+              }
+            }
+          };
+          switch (pl) {
+            case 0:
               {}
-            case "PUT":
+            case "application/x-www-form-urlencoded":
               {}
-            case "PATCH":
+            case "text/plain":
               {}
-            case "DELETE":
+            case "text/html":
+              {}
+            default:
+              {}
+            case "application/x-mpegURL":
+              {}
+            case "application/x-mpegurl":
+              {}
+            case "application/vnd.apple.mpegurl":
+              {}
+            case "audio/mpegurl":
+              {}
+            case "text/xml":
+              {}
+            case "text/plist":
+              {}
+            case "application/xml":
+              {}
+            case "application/plist":
+              {}
+            case "application/x-plist":
+              {}
+            case "text/vtt":
+              {}
+            case "application/vtt":
               {
-                switch (yl) {
-                  case 0:
-                    {}
-                  case "application/x-www-form-urlencoded":
-                    {}
-                  case "text/plain":
-                    {}
-                  case "text/html":
-                    {}
-                  default:
-                    {}
-                  case "application/x-mpegURL":
-                    {}
-                  case "application/x-mpegurl":
-                    {}
-                  case "application/vnd.apple.mpegurl":
-                    {}
-                  case "audio/mpegurl":
-                    {}
-                  case "text/xml":
-                    {}
-                  case "text/plist":
-                    {}
-                  case "application/xml":
-                    {}
-                  case "application/plist":
-                    {}
-                  case "application/x-plist":
-                    {}
-                  case "text/vtt":
-                    {}
-                  case "application/vtt":
-                    {
-                      break;
+                break;
+              }
+            case "text/json":
+              {}
+            case "application/json":
+              {
+                if (a = JSON.parse($response.body ?? "{}"), "youtubei/v1/player" === ml) {
+                  if (a?.captions && (cl.log(`⚠ ${cl.name}, Captions`, ""), a?.captions.playerCaptionsRenderer && (a.captions.playerCaptionsRenderer.visibility = "ON", a.captions.playerCaptionsRenderer.showAutoCaptions = !0), a?.captions?.playerCaptionsTracklistRenderer)) {
+                    switch (cl.log(`⚠ ${cl.name}, Tracklist`, ""), a?.captions?.playerCaptionsTracklistRenderer?.captionTracks && (a.captions.playerCaptionsTracklistRenderer.captionTracks = a?.captions?.playerCaptionsTracklistRenderer.captionTracks.map(l => (l.isTranslatable = !0, l))), hl) {
+                      case "www.youtube.com":
+                        {}
+                      case "tv.youtube.com":
+                        {}
+                      default:
+                        {
+                          a.captions.playerCaptionsTracklistRenderer.translationLanguages = u.translationLanguages.DESKTOP;
+                          break;
+                        }
+                      case "m.youtube.com":
+                        {}
+                      case "youtubei.googleapis.com":
+                        {
+                          a.captions.playerCaptionsTracklistRenderer.translationLanguages = u.translationLanguages.MOBILE;
+                        }
                     }
-                  case "text/json":
-                    {}
-                  case "application/json":
-                    {
-                      switch (r = JSON.parse($request.body ?? "{}"), bl) {
-                        case "youtubei/v1/player":
-                          {
-                            if (r?.playbackContext) {
-                              fl.log(`⚠ ${fl.name}, playbackContext`, "");
-                              r?.playbackContext.contentPlaybackContext && (r.playbackContext.contentPlaybackContext.autoCaptionsDefaultOn = !0);
-                            }
-                            break;
-                          }
-                        case "youtubei/v1/browse":
-                          {
-                            if (r?.browseId?.startsWith?.("MPLYt_")) {
-                              l.set(hl, "query.subtype", "Translate");
-                            }
-                          }
-                      }
-                      $request.body = JSON.stringify(r);
-                      break;
-                    }
+                  }
+                }
+                $response.body = JSON.stringify(a);
+                break;
+              }
+            case "application/protobuf":
+              {}
+            case "application/x-protobuf":
+              {}
+            case "application/vnd.google.protobuf":
+              {}
+            case "application/grpc":
+              {}
+            case "application/grpc+proto":
+              {}
+            case "application/octet-stream":
+              {
+                let l = cl.isQuanX() ? new Uint8Array($response.bodyBytes ?? []) : $response.body ?? new Uint8Array();
+                switch (pl) {
                   case "application/protobuf":
                     {}
                   case "application/x-protobuf":
                     {}
                   case "application/vnd.google.protobuf":
-                    {}
-                  case "application/grpc":
-                    {}
-                  case "application/grpc+proto":
-                    {}
-                  case "application/octet-stream":
                     {
-                      let n = fl.isQuanX() ? new Uint8Array($request.bodyBytes ?? []) : $request.body ?? new Uint8Array();
-                      switch (yl) {
-                        case "application/protobuf":
-                          {}
-                        case "application/x-protobuf":
-                          {}
-                        case "application/vnd.google.protobuf":
-                          {
-                            class e extends cl {
-                              constructor() {
-                                super("Context", [{
-                                  no: 1,
-                                  name: "client",
-                                  kind: "message",
-                                  T: () => s
-                                }, {
-                                  no: 9,
-                                  name: "adSignalsInfo",
-                                  kind: "message",
-                                  T: () => o
-                                }]);
-                              }
-                            }
-                            const t = new e();
-                            class a extends cl {
-                              constructor() {
-                                super("Client", [{
-                                  no: 1,
-                                  name: "hl",
-                                  kind: "scalar",
-                                  opt: !0,
-                                  T: 9
-                                }, {
-                                  no: 2,
-                                  name: "gl",
-                                  kind: "scalar",
-                                  opt: !0,
-                                  T: 9
-                                }, {
-                                  no: 12,
-                                  name: "deviceMake",
-                                  kind: "scalar",
-                                  T: 9
-                                }, {
-                                  no: 13,
-                                  name: "deviceModel",
-                                  kind: "scalar",
-                                  T: 9
-                                }, {
-                                  no: 16,
-                                  name: "clientName",
-                                  kind: "scalar",
-                                  T: 5
-                                }, {
-                                  no: 17,
-                                  name: "clientVersion",
-                                  kind: "scalar",
-                                  T: 9
-                                }, {
-                                  no: 18,
-                                  name: "osName",
-                                  kind: "scalar",
-                                  T: 9
-                                }, {
-                                  no: 19,
-                                  name: "osVersion",
-                                  kind: "scalar",
-                                  T: 9
-                                }, {
-                                  no: 80,
-                                  name: "timeZone",
-                                  kind: "scalar",
-                                  T: 9
-                                }]);
-                              }
-                            }
-                            const s = new a();
-                            class i extends cl {
-                              constructor() {
-                                super("AdSignalsInfo", [{
-                                  no: 1,
-                                  name: "params",
-                                  kind: "map",
-                                  K: 9,
-                                  V: {
-                                    kind: "scalar",
-                                    T: 9
-                                  }
-                                }]);
-                              }
-                            }
-                            const o = new i();
-                            switch (bl) {
-                              case "youtubei/v1/player":
-                                {
-                                  class e extends cl {
-                                    constructor() {
-                                      super("Player", [{
-                                        no: 1,
-                                        name: "context",
-                                        kind: "message",
-                                        T: () => t
-                                      }, {
-                                        no: 2,
-                                        name: "videoId",
-                                        kind: "scalar",
-                                        T: 9
-                                      }, {
-                                        no: 4,
-                                        name: "playbackContext",
-                                        kind: "message",
-                                        T: () => i
-                                      }]);
-                                    }
-                                  }
-                                  const a = new e();
-                                  class s extends cl {
-                                    constructor() {
-                                      super("PlaybackContext", [{
-                                        no: 1,
-                                        name: "contentPlaybackContext",
-                                        kind: "message",
-                                        T: () => g
-                                      }]);
-                                    }
-                                  }
-                                  const i = new s();
-                                  class o extends cl {
-                                    constructor() {
-                                      super("ContentPlaybackContext", [{
-                                        no: 4,
-                                        name: "id4",
-                                        kind: "scalar",
-                                        opt: !0,
-                                        T: 5
-                                      }, {
-                                        no: 6,
-                                        name: "id6",
-                                        kind: "scalar",
-                                        opt: !0,
-                                        T: 5
-                                      }, {
-                                        no: 8,
-                                        name: "id8",
-                                        kind: "scalar",
-                                        opt: !0,
-                                        T: 5
-                                      }, {
-                                        no: 9,
-                                        name: "id9",
-                                        kind: "scalar",
-                                        opt: !0,
-                                        T: 5
-                                      }]);
-                                    }
-                                  }
-                                  const g = new o();
-                                  r = a.fromBinary(n);
-                                  r?.playbackContext && (fl.log(`⚠ ${fl.name}, playbackContext`, ""), r?.playbackContext.contentPlaybackContext && (r.playbackContext.contentPlaybackContext.id4 = 1, r.playbackContext.contentPlaybackContext.id6 = 1, r.playbackContext.contentPlaybackContext.id8 = 1, r.playbackContext.contentPlaybackContext.id9 = 1));
-                                  n = a.toBinary(r);
-                                  break;
-                                }
-                              case "youtubei/v1/browse":
-                                {
-                                  class c extends cl {
-                                    constructor() {
-                                      super("Browse", [{
-                                        no: 1,
-                                        name: "context",
-                                        kind: "message",
-                                        T: () => t
-                                      }, {
-                                        no: 2,
-                                        name: "browseId",
-                                        kind: "scalar",
-                                        opt: !0,
-                                        T: 9
-                                      }]);
-                                    }
-                                  }
-                                  const f = new c();
-                                  r = f.fromBinary(n);
-                                  r?.browseId?.startsWith?.("MPLYt_") && (u.Types.includes("Translate") ? l.set(hl, "query.subtype", "Translate") : u.Types.includes("External") && l.set(hl, "query.subtype", "External"));
-                                  n = f.toBinary(r);
-                                }
-                            }
+                      if ("youtubei/v1/player" === ml) {
+                        class n extends gl {
+                          constructor() {
+                            super("Player", [{
+                              no: 10,
+                              name: "captions",
+                              kind: "message",
+                              T: () => s
+                            }]);
                           }
-                      }
-                      $request.body = n;
-                    }
-                }
-              }
-            case "GET":
-              {
-                switch (pl) {
-                  case "www.youtube.com":
-                    {}
-                  case "m.youtube.com":
-                    {
-                      if ("api/timedtext" === bl) {
-                        if (!hl.query?.tlang) {
-                          switch (fl.log(`⚠ ${fl.name}, 翻译语言：未指定`, ""), hl.query?.v && hl.query?.lang && (t.Playlists.Subtitle.set(hl.query.v, hl.query.lang), t.Playlists.Subtitle = function (l, n = 100) {
-                            console.log(`☑️ Set Cache, cacheSize: ${n}`, "");
-                            l = (l = Array.from(l || [])).slice(-n);
-                            console.log("✅ Set Cache", "");
-                            return l;
-                          }(t?.Playlists.Subtitle, u.CacheSize), n.setItem("@DualSubs.Composite.Caches.Playlists.Subtitle", t.Playlists.Subtitle)), u.AutoCC) {
-                            case !0:
+                        }
+                        const e = new n();
+                        class t extends gl {
+                          constructor() {
+                            super("Captions", [{
+                              no: 51621377,
+                              name: "playerCaptionsTracklistRenderer",
+                              kind: "message",
+                              T: () => i
+                            }]);
+                          }
+                        }
+                        const s = new t();
+                        class r extends gl {
+                          constructor() {
+                            super("PlayerCaptionsTracklistRenderer", [{
+                              no: 1,
+                              name: "captionTracks",
+                              kind: "message",
+                              repeat: 1,
+                              T: () => g
+                            }, {
+                              no: 2,
+                              name: "audioTracks",
+                              kind: "message",
+                              repeat: 1,
+                              T: () => d
+                            }, {
+                              no: 3,
+                              name: "translationLanguages",
+                              kind: "message",
+                              repeat: 1,
+                              T: () => h
+                            }, {
+                              no: 4,
+                              name: "defaultAudioTrackIndex",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 5
+                            }, {
+                              no: 6,
+                              name: "defaultCaptionTrackIndex",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 5
+                            }]);
+                          }
+                        }
+                        const i = new r();
+                        class o extends gl {
+                          constructor() {
+                            super("CaptionTracks", [{
+                              no: 1,
+                              name: "baseUrl",
+                              kind: "scalar",
+                              T: 9
+                            }, {
+                              no: 2,
+                              name: "name",
+                              kind: "message",
+                              T: () => p
+                            }, {
+                              no: 3,
+                              name: "vssId",
+                              kind: "scalar",
+                              T: 9
+                            }, {
+                              no: 4,
+                              name: "languageCode",
+                              kind: "scalar",
+                              T: 9
+                            }, {
+                              no: 5,
+                              name: "kind",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 9
+                            }, {
+                              no: 6,
+                              name: "rtl",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 8
+                            }, {
+                              no: 7,
+                              name: "isTranslatable",
+                              kind: "scalar",
+                              T: 8
+                            }]);
+                          }
+                        }
+                        const g = new o();
+                        class c extends gl {
+                          constructor() {
+                            super("AudioTracks", [{
+                              no: 2,
+                              name: "captionTrackIndices",
+                              kind: "scalar",
+                              repeat: 2,
+                              T: 5
+                            }, {
+                              no: 3,
+                              name: "defaultCaptionTrackIndex",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 5
+                            }, {
+                              no: 4,
+                              name: "forcedCaptionTrackIndex",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 5
+                            }, {
+                              no: 5,
+                              name: "visibility",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 5
+                            }, {
+                              no: 6,
+                              name: "hasDefaultTrack",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 8
+                            }, {
+                              no: 7,
+                              name: "hasForcedTrack",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 8
+                            }, {
+                              no: 8,
+                              name: "audioTrackId",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 9
+                            }, {
+                              no: 11,
+                              name: "captionsInitialState",
+                              kind: "scalar",
+                              opt: !0,
+                              T: 5
+                            }]);
+                          }
+                        }
+                        const d = new c();
+                        class f extends gl {
+                          constructor() {
+                            super("TranslationLanguages", [{
+                              no: 1,
+                              name: "languageCode",
+                              kind: "scalar",
+                              T: 9
+                            }, {
+                              no: 2,
+                              name: "languageName",
+                              kind: "message",
+                              T: () => p
+                            }]);
+                          }
+                        }
+                        const h = new f();
+                        class m extends gl {
+                          constructor() {
+                            super("Name", [{
+                              no: 1,
+                              name: "runs",
+                              kind: "message",
+                              repeat: 1,
+                              T: () => y
+                            }]);
+                          }
+                        }
+                        const p = new m();
+                        class b extends gl {
+                          constructor() {
+                            super("Runs", [{
+                              no: 1,
+                              name: "text",
+                              kind: "scalar",
+                              T: 9
+                            }]);
+                          }
+                        }
+                        const y = new b();
+                        a = e.fromBinary(l);
+                        cl.log(`🚧 ${cl.name}`, `body: ${JSON.stringify(a)}`, "");
+                        if (a?.captions && (cl.log(`⚠ ${cl.name}, Captions`, ""), a?.captions?.playerCaptionsTracklistRenderer)) {
+                          switch (cl.log(`⚠ ${cl.name}, Tracklist`, ""), a?.captions?.playerCaptionsTracklistRenderer?.captionTracks && (a.captions.playerCaptionsTracklistRenderer.captionTracks = a?.captions?.playerCaptionsTracklistRenderer.captionTracks.map(l => (l.isTranslatable = !0, l))), a?.captions?.playerCaptionsTracklistRenderer?.audioTracks && (a.captions.playerCaptionsTracklistRenderer.audioTracks = a?.captions?.playerCaptionsTracklistRenderer.audioTracks.map(l => (l.visibility = 2, l.hasDefaultTrack = !0, l.captionsInitialState = 3, l))), hl) {
+                            case "www.youtube.com":
+                              {}
+                            case "tv.youtube.com":
                               {}
                             default:
                               {
-                                fl.log(`⚠ ${fl.name}, 自动翻译字幕：开启`, "");
-                                t.tlang && t.tlang !== hl.query?.lang && l.set(hl, "query.tlang", t.tlang);
+                                a.captions.playerCaptionsTracklistRenderer.translationLanguages = u.translationLanguages.DESKTOP;
                                 break;
                               }
-                            case !1:
+                            case "m.youtube.com":
+                              {}
+                            case "youtubei.googleapis.com":
                               {
-                                fl.log(`⚠ ${fl.name}, 自动翻译字幕：关闭`, "");
+                                a.captions.playerCaptionsTracklistRenderer.translationLanguages = u.translationLanguages.MOBILE;
                               }
                           }
+                          a?.captions?.playerCaptionsTracklistRenderer?.defaultCaptionTrackIndex || (a.captions.playerCaptionsTracklistRenderer.defaultCaptionTrackIndex = 0);
                         }
-                        if (hl.query?.tlang) {
-                          switch (fl.log(`⚠ ${fl.name}, 翻译语言：已指定`, ""), t.tlang = hl.query.tlang, n.setItem("@DualSubs.YouTube.Caches.tlang", t.tlang), u.Type) {
-                            case "Composite":
-                              {}
-                            case "Official":
-                              {}
-                            default:
-                              {
-                                fl.log(`⚠ ${fl.name}, 官方字幕：合成器`, "");
-                                u.ShowOnly || l.set(hl, "query.subtype", "Official");
-                                break;
-                              }
-                            case "Translate":
-                              {
-                                fl.log(`⚠ ${fl.name}, 翻译字幕：翻译器`, "");
-                                delete hl.query?.tlang;
-                                l.set(hl, "query.subtype", "Translate");
-                                break;
-                              }
-                            case "External":
-                              {
-                                fl.log(`⚠ ${fl.name}, 外部字幕：外部源`, "");
-                                delete hl.query?.tlang;
-                                l.set(hl, "query.subtype", "External");
-                              }
-                          }
-                        }
+                        l = e.toBinary(a);
                       }
                     }
                 }
+                $response.body = l;
               }
           }
-          $request.headers?.Host && ($request.headers.Host = hl.host);
-          $request.url = e.stringify(hl);
-          fl.log(`🚧 ${fl.name}, 调试信息`, `$request.url: ${$request.url}`, "");
         }
       case !1:
         {}
     }
-  })().catch(l => fl.logErr(l)).finally(() => {
-    if (0 === dl) {
-      fl.done($request);
-    } else {
-      fl.isQuanX() ? (dl.status || (dl.status = "HTTP/1.1 200 OK"), delete dl.headers?.["Content-Length"], delete dl.headers?.["content-length"], delete dl.headers?.["Transfer-Encoding"], fl.done(dl)) : fl.done({
-        response: dl
-      });
-    }
-  });
+  })().catch(l => cl.logErr(l)).finally(() => cl.done($response));
 }
